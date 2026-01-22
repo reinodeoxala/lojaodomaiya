@@ -1,90 +1,131 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Odòmáiyá Artigos Religiosos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Odòmáiyá Artigos Religiosos – Loja profissional de artigos espirituais com tradição e fundamento." />
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* HEADER */
+header {
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav {
+  max-width: 1300px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+  font-weight: 500;
+}
+
+.menu a {
+  text-decoration: none;
   color: #111;
 }
 
-/* HEADER PREMIUM */
-header {
-  background: linear-gradient(120deg, #ffffff, #f3f4f6);
-  padding: 80px 20px;
+/* HERO */
+.hero {
+  background: linear-gradient(120deg, #ffffff, #f1f5f9);
+  padding: 100px 20px;
   text-align: center;
-  border-bottom: 1px solid #e5e7eb;
 }
 
-header h1 {
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: 1px;
+.hero h1 {
+  font-size: 52px;
+  font-weight: 800;
 }
 
-header p {
-  color: #555;
+.hero p {
+  margin-top: 16px;
   font-size: 18px;
-  max-width: 720px;
-  margin: 12px auto 0;
+  color: #555;
+}
+
+/* BUSCA */
+.busca {
+  max-width: 600px;
+  margin: 30px auto 0;
+}
+
+.busca input {
+  width: 100%;
+  padding: 16px 22px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  font-size: 15px;
 }
 
 /* CONTAINER */
 .container {
-  max-width: 1250px;
+  max-width: 1300px;
   margin: auto;
   padding: 60px 20px;
 }
 
-/* CATEGORIAS */
-.categorias {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-  gap: 20px;
-  margin-bottom: 60px;
+/* FILTRO */
+.filtros {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
 
-.categoria {
+.filtro {
+  padding: 10px 18px;
+  border-radius: 999px;
   background: #fff;
-  padding: 22px;
-  text-align: center;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.05);
-  font-weight: 600;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-/* PRODUTOS */
-.section-title {
-  font-size: 30px;
-  margin-bottom: 30px;
-}
-
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 32px;
 }
 
+/* CARD */
 .card {
   background: #fff;
-  border-radius: 24px;
+  border-radius: 26px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,.08);
+  box-shadow: 0 15px 40px rgba(0,0,0,.05);
   transition: .3s;
-  display: flex;
-  flex-direction: column;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 30px 60px rgba(0,0,0,.12);
+  box-shadow: 0 25px 60px rgba(0,0,0,.1);
 }
 
 .card img {
@@ -98,12 +139,11 @@ header p {
 }
 
 .card h3 {
-  font-size: 18px;
-  margin: 0;
+  font-size: 17px;
 }
 
 .card button {
-  margin-top: 18px;
+  margin-top: 16px;
   width: 100%;
   padding: 14px;
   background: linear-gradient(135deg, #d4af37, #f5d76e);
@@ -113,7 +153,7 @@ header p {
   cursor: pointer;
 }
 
-/* CARRINHO PREMIUM */
+/* CARRINHO */
 #carrinho {
   position: fixed;
   bottom: 25px;
@@ -121,11 +161,10 @@ header p {
   background: #111;
   color: #fff;
   padding: 16px 24px;
-  border-radius: 100px;
-  font-size: 15px;
+  border-radius: 999px;
+  font-size: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
   cursor: pointer;
-  box-shadow: 0 20px 50px rgba(0,0,0,.3);
-  z-index: 9999;
 }
 </style>
 </head>
@@ -133,77 +172,96 @@ header p {
 <body>
 
 <header>
-  <h1>Odòmáiyá Artigos Religiosos</h1>
-  <p>Referência em artigos religiosos com fundamento, tradição e respeito. Atendimento profissional online e presencial.</p>
+  <div class="nav">
+    <div class="logo">Odòmáiyá</div>
+    <div class="menu">
+      <a href="#">Início</a>
+      <a href="#">Produtos</a>
+      <a href="#">Contato</a>
+    </div>
+  </div>
 </header>
+
+<section class="hero">
+  <h1>Artigos religiosos com excelência</h1>
+  <p>Tradição, respeito e atendimento profissional online e presencial.</p>
+
+  <div class="busca">
+    <input type="text" placeholder="Buscar produto..." oninput="filtrar(this.value)">
+  </div>
+</section>
 
 <div class="container">
 
-  <!-- CATEGORIAS -->
-  <div class="categorias">
-    <div class="categoria">🕯️ Velas</div>
-    <div class="categoria">📿 Guias</div>
-    <div class="categoria">🗿 Imagens</div>
-    <div class="categoria">🌿 Ervas</div>
-    <div class="categoria">🔥 Incensos</div>
-    <div class="categoria">✨ Kits Espirituais</div>
+  <div class="filtros">
+    <div class="filtro" onclick="categoriaFiltro('todos')">Todos</div>
+    <div class="filtro" onclick="categoriaFiltro('velas')">Velas</div>
+    <div class="filtro" onclick="categoriaFiltro('imagens')">Imagens</div>
+    <div class="filtro" onclick="categoriaFiltro('guias')">Guias</div>
+    <div class="filtro" onclick="categoriaFiltro('kits')">Kits</div>
   </div>
 
-  <h2 class="section-title">Produtos em Destaque</h2>
-
-  <div class="grid" id="listaProdutos"></div>
+  <div class="grid" id="produtos"></div>
 </div>
 
-<div id="carrinho">🛒 Pedido: <span id="qtd">0</span> itens</div>
+<div id="carrinho">🛒 Pedido: <span id="qtd">0</span></div>
 
 <script>
 const produtos = [
-  "Vela 7 dias branca",
-  "Vela 7 dias vermelha",
-  "Vela dourada Oxum",
-  "Incenso artesanal premium",
-  "Guia de Oxalá luxo",
-  "Guia de Pombagira",
-  "Imagem Exu Tranca Ruas 30cm",
-  "Imagem Maria Padilha",
-  "Kit limpeza espiritual",
-  "Kit prosperidade",
-  "Ervas ritualísticas",
-  "Defumador consagrado",
-  "Colar proteção espiritual",
-  "Perfume espiritual",
-  "Óleo consagrado",
-  "Pemba consagrada"
+  {nome:"Vela 7 dias branca",cat:"velas"},
+  {nome:"Vela dourada Oxum",cat:"velas"},
+  {nome:"Imagem Exu Tranca Ruas",cat:"imagens"},
+  {nome:"Imagem Maria Padilha",cat:"imagens"},
+  {nome:"Guia de Oxalá luxo",cat:"guias"},
+  {nome:"Guia de Ogum",cat:"guias"},
+  {nome:"Kit limpeza espiritual",cat:"kits"},
+  {nome:"Kit prosperidade",cat:"kits"}
 ];
 
 let carrinho = [];
-const lista = document.getElementById("listaProdutos");
+let filtroAtual = "todos";
 
-produtos.forEach((nome,i)=>{
-  lista.innerHTML += `
-    <div class="card">
-      <img src="https://picsum.photos/500?random=${i}">
-      <div class="info">
-        <h3>${nome}</h3>
-        <button onclick="add('${nome}')">Adicionar ao pedido</button>
-      </div>
-    </div>
-  `;
-});
+function render() {
+  const grid = document.getElementById("produtos");
+  grid.innerHTML = "";
+  produtos.filter(p => filtroAtual==="todos" || p.cat===filtroAtual)
+    .forEach((p,i)=>{
+      grid.innerHTML += `
+        <div class="card">
+          <img src="https://picsum.photos/500?random=${i}">
+          <div class="info">
+            <h3>${p.nome}</h3>
+            <button onclick="add('${p.nome}')">Adicionar ao pedido</button>
+          </div>
+        </div>`;
+    });
+}
 
 function add(nome){
   carrinho.push(nome);
   document.getElementById("qtd").innerText = carrinho.length;
-
   const texto = encodeURIComponent(
-    "Olá! Gostaria de fazer um pedido na Odòmáiyá:\n\n" +
+    "Olá! Pedido Odòmáiyá:\n\n" +
     carrinho.map(i=>"• "+i).join("\n")
   );
-
   document.getElementById("carrinho").onclick = () => {
     window.open("https://wa.me/5554996048808?text="+texto);
   };
 }
+
+function categoriaFiltro(cat){
+  filtroAtual = cat;
+  render();
+}
+
+function filtrar(txt){
+  const grid = document.getElementById("produtos");
+  grid.querySelectorAll(".card").forEach(c=>{
+    c.style.display = c.innerText.toLowerCase().includes(txt.toLowerCase()) ? "block" : "none";
+  });
+}
+
+render();
 </script>
 
 </body>
