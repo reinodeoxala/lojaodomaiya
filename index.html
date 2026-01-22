@@ -2,173 +2,97 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Odòmáiyá Artigos Religiosos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Odòmáiyá Artigos Religiosos – Loja profissional de artigos espirituais com tradição e fundamento." />
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: #f9fafb;
-  color: #111827;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#f9fafb;color:#111}
 
 /* HEADER */
-header {
-  background: #fff;
-  border-bottom: 1px solid #e5e7eb;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+header{
+  position:sticky;top:0;background:#fff;
+  border-bottom:1px solid #e5e7eb;z-index:10
 }
-
-.nav {
-  max-width: 1300px;
-  margin: auto;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.nav{
+  max-width:1300px;margin:auto;
+  padding:20px;display:flex;
+  justify-content:space-between;align-items:center
 }
-
-.logo {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.menu {
-  display: flex;
-  gap: 30px;
-  font-weight: 500;
-}
-
-.menu a {
-  text-decoration: none;
-  color: #111;
-}
+.logo{font-size:24px;font-weight:800}
+.menu a{text-decoration:none;color:#111;margin-left:25px;font-weight:500}
 
 /* HERO */
-.hero {
-  background: linear-gradient(120deg, #ffffff, #f1f5f9);
-  padding: 100px 20px;
-  text-align: center;
+.hero{
+  background:linear-gradient(120deg,#fff,#f1f5f9);
+  padding:90px 20px;text-align:center
 }
-
-.hero h1 {
-  font-size: 52px;
-  font-weight: 800;
-}
-
-.hero p {
-  margin-top: 16px;
-  font-size: 18px;
-  color: #555;
-}
-
-/* BUSCA */
-.busca {
-  max-width: 600px;
-  margin: 30px auto 0;
-}
-
-.busca input {
-  width: 100%;
-  padding: 16px 22px;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  font-size: 15px;
+.hero h1{font-size:50px}
+.hero p{margin-top:15px;color:#555}
+.busca{max-width:500px;margin:30px auto}
+.busca input{
+  width:100%;padding:16px;border-radius:999px;
+  border:1px solid #e5e7eb;font-size:15px
 }
 
 /* CONTAINER */
-.container {
-  max-width: 1300px;
-  margin: auto;
-  padding: 60px 20px;
-}
+.container{max-width:1300px;margin:auto;padding:60px 20px}
 
-/* FILTRO */
-.filtros {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-
-.filtro {
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-  font-size: 14px;
+/* CATEGORIAS */
+.categorias{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:40px}
+.cat{
+  background:#fff;padding:12px 22px;border-radius:999px;
+  border:1px solid #e5e7eb;cursor:pointer
 }
 
 /* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 32px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px
 }
-
-/* CARD */
-.card {
-  background: #fff;
-  border-radius: 26px;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0,0,0,.05);
-  transition: .3s;
+.card{
+  background:#fff;border-radius:22px;overflow:hidden;
+  box-shadow:0 15px 40px rgba(0,0,0,.06);
+  transition:.3s
 }
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 25px 60px rgba(0,0,0,.1);
-}
-
-.card img {
-  width: 100%;
-  height: 230px;
-  object-fit: cover;
-}
-
-.card .info {
-  padding: 22px;
-}
-
-.card h3 {
-  font-size: 17px;
-}
-
-.card button {
-  margin-top: 16px;
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #d4af37, #f5d76e);
-  border: none;
-  border-radius: 14px;
-  font-weight: 600;
-  cursor: pointer;
+.card:hover{transform:translateY(-6px)}
+.card img{width:100%;height:220px;object-fit:cover}
+.info{padding:20px}
+.info h3{font-size:17px}
+.preco{margin-top:8px;font-weight:600}
+.info button{
+  margin-top:15px;width:100%;padding:12px;
+  border:none;border-radius:12px;
+  background:linear-gradient(135deg,#d4af37,#f5d76e);
+  font-weight:600;cursor:pointer
 }
 
 /* CARRINHO */
-#carrinho {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: #111;
-  color: #fff;
-  padding: 16px 24px;
-  border-radius: 999px;
-  font-size: 14px;
-  box-shadow: 0 20px 60px rgba(0,0,0,.3);
-  cursor: pointer;
+.cart-btn{
+  position:fixed;bottom:25px;right:25px;
+  background:#111;color:#fff;padding:15px 25px;
+  border-radius:999px;cursor:pointer;
+  box-shadow:0 20px 50px rgba(0,0,0,.3)
+}
+.cart-panel{
+  position:fixed;top:0;right:-100%;
+  width:350px;height:100%;
+  background:#fff;box-shadow:-10px 0 30px rgba(0,0,0,.15);
+  transition:.3s;padding:20px;overflow:auto;z-index:99
+}
+.cart-panel.open{right:0}
+.cart-item{border-bottom:1px solid #eee;padding:10px 0}
+.total{font-weight:700;margin:15px 0}
+.cart-panel button{
+  width:100%;padding:14px;border:none;
+  border-radius:14px;background:#111;color:#fff;
+  cursor:pointer
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -184,81 +108,98 @@ header {
 
 <section class="hero">
   <h1>Artigos religiosos com excelência</h1>
-  <p>Tradição, respeito e atendimento profissional online e presencial.</p>
-
+  <p>Tradição, respeito e atendimento profissional</p>
   <div class="busca">
-    <input type="text" placeholder="Buscar produto..." oninput="filtrar(this.value)">
+    <input placeholder="Buscar produto..." oninput="buscar(this.value)">
   </div>
 </section>
 
 <div class="container">
-
-  <div class="filtros">
-    <div class="filtro" onclick="categoriaFiltro('todos')">Todos</div>
-    <div class="filtro" onclick="categoriaFiltro('velas')">Velas</div>
-    <div class="filtro" onclick="categoriaFiltro('imagens')">Imagens</div>
-    <div class="filtro" onclick="categoriaFiltro('guias')">Guias</div>
-    <div class="filtro" onclick="categoriaFiltro('kits')">Kits</div>
+  <div class="categorias">
+    <div class="cat" onclick="filtro('todos')">Todos</div>
+    <div class="cat" onclick="filtro('velas')">Velas</div>
+    <div class="cat" onclick="filtro('imagens')">Imagens</div>
+    <div class="cat" onclick="filtro('guias')">Guias</div>
+    <div class="cat" onclick="filtro('kits')">Kits</div>
   </div>
 
   <div class="grid" id="produtos"></div>
 </div>
 
-<div id="carrinho">🛒 Pedido: <span id="qtd">0</span></div>
+<div class="cart-btn" onclick="abrirCarrinho()">🛒 Carrinho (<span id="qtd">0</span>)</div>
+
+<div class="cart-panel" id="painel">
+  <h2>Seu pedido</h2>
+  <div id="itens"></div>
+  <div class="total" id="total"></div>
+  <button onclick="finalizar()">Finalizar no WhatsApp</button>
+</div>
 
 <script>
-const produtos = [
-  {nome:"Vela 7 dias branca",cat:"velas"},
-  {nome:"Vela dourada Oxum",cat:"velas"},
-  {nome:"Imagem Exu Tranca Ruas",cat:"imagens"},
-  {nome:"Imagem Maria Padilha",cat:"imagens"},
-  {nome:"Guia de Oxalá luxo",cat:"guias"},
-  {nome:"Guia de Ogum",cat:"guias"},
-  {nome:"Kit limpeza espiritual",cat:"kits"},
-  {nome:"Kit prosperidade",cat:"kits"}
+const lista = [
+ {nome:"Vela 7 dias branca",cat:"velas",preco:12},
+ {nome:"Vela dourada Oxum",cat:"velas",preco:15},
+ {nome:"Imagem Exu Tranca Ruas",cat:"imagens",preco:89},
+ {nome:"Imagem Maria Padilha",cat:"imagens",preco:95},
+ {nome:"Guia de Oxalá luxo",cat:"guias",preco:55},
+ {nome:"Kit limpeza espiritual",cat:"kits",preco:70},
+ {nome:"Kit prosperidade",cat:"kits",preco:85},
+ {nome:"Incenso artesanal",cat:"velas",preco:18},
+ {nome:"Defumador consagrado",cat:"velas",preco:22}
 ];
 
-let carrinho = [];
-let filtroAtual = "todos";
+let filtroAtual="todos";
+let carrinho=[];
 
-function render() {
-  const grid = document.getElementById("produtos");
-  grid.innerHTML = "";
-  produtos.filter(p => filtroAtual==="todos" || p.cat===filtroAtual)
-    .forEach((p,i)=>{
-      grid.innerHTML += `
-        <div class="card">
-          <img src="https://picsum.photos/500?random=${i}">
-          <div class="info">
-            <h3>${p.nome}</h3>
-            <button onclick="add('${p.nome}')">Adicionar ao pedido</button>
-          </div>
-        </div>`;
-    });
+function render(){
+ const grid=document.getElementById("produtos");
+ grid.innerHTML="";
+ lista.filter(p=>filtroAtual==="todos"||p.cat===filtroAtual)
+ .forEach((p,i)=>{
+  grid.innerHTML+=`
+   <div class="card">
+    <img src="https://picsum.photos/500?random=${i}">
+    <div class="info">
+      <h3>${p.nome}</h3>
+      <div class="preco">R$ ${p.preco},00</div>
+      <button onclick="add(${i})">Adicionar ao pedido</button>
+    </div>
+   </div>`;
+ });
 }
 
-function add(nome){
-  carrinho.push(nome);
-  document.getElementById("qtd").innerText = carrinho.length;
-  const texto = encodeURIComponent(
-    "Olá! Pedido Odòmáiyá:\n\n" +
-    carrinho.map(i=>"• "+i).join("\n")
-  );
-  document.getElementById("carrinho").onclick = () => {
-    window.open("https://wa.me/5554996048808?text="+texto);
-  };
+function add(i){
+ carrinho.push(lista[i]);
+ atualizar();
 }
 
-function categoriaFiltro(cat){
-  filtroAtual = cat;
-  render();
+function atualizar(){
+ document.getElementById("qtd").innerText=carrinho.length;
+ const itens=document.getElementById("itens");
+ itens.innerHTML="";
+ let total=0;
+ carrinho.forEach(p=>{
+  total+=p.preco;
+  itens.innerHTML+=`<div class="cart-item">${p.nome} - R$ ${p.preco}</div>`;
+ });
+ document.getElementById("total").innerText="Total: R$ "+total;
 }
 
-function filtrar(txt){
-  const grid = document.getElementById("produtos");
-  grid.querySelectorAll(".card").forEach(c=>{
-    c.style.display = c.innerText.toLowerCase().includes(txt.toLowerCase()) ? "block" : "none";
-  });
+function abrirCarrinho(){
+ document.getElementById("painel").classList.toggle("open");
+}
+
+function finalizar(){
+ let texto="Olá! Gostaria de fazer um pedido na Odòmáiyá:%0A%0A";
+ carrinho.forEach(p=>texto+="• "+p.nome+" - R$ "+p.preco+"%0A");
+ window.open("https://wa.me/5554996048808?text="+texto);
+}
+
+function filtro(cat){filtroAtual=cat;render()}
+function buscar(t){
+ document.querySelectorAll(".card").forEach(c=>{
+  c.style.display=c.innerText.toLowerCase().includes(t.toLowerCase())?"block":"none";
+ });
 }
 
 render();
