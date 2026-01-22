@@ -11,57 +11,73 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #f9fafb;
+  background: #f8fafc;
   color: #111;
 }
 
-/* TOPO */
+/* HEADER PREMIUM */
 header {
-  background: linear-gradient(135deg, #ffffff, #f1f5f9);
-  padding: 70px 20px;
+  background: linear-gradient(120deg, #ffffff, #f3f4f6);
+  padding: 80px 20px;
   text-align: center;
   border-bottom: 1px solid #e5e7eb;
 }
 
 header h1 {
-  font-size: 44px;
+  font-size: 48px;
   font-weight: 700;
+  letter-spacing: 1px;
 }
 
 header p {
   color: #555;
+  font-size: 18px;
   max-width: 720px;
-  margin: 10px auto 0;
-  font-size: 17px;
+  margin: 12px auto 0;
 }
 
 /* CONTAINER */
 .container {
-  max-width: 1200px;
+  max-width: 1250px;
   margin: auto;
-  padding: 50px 20px;
+  padding: 60px 20px;
 }
 
-/* TÍTULO */
+/* CATEGORIAS */
+.categorias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.categoria {
+  background: #fff;
+  padding: 22px;
+  text-align: center;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  font-weight: 600;
+}
+
+/* PRODUTOS */
 .section-title {
-  font-size: 28px;
+  font-size: 30px;
   margin-bottom: 30px;
 }
 
-/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
+  gap: 32px;
 }
 
-/* CARD PRODUTO */
 .card {
   background: #fff;
-  border-radius: 22px;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,.08);
-  transition: .3s ease;
+  box-shadow: 0 20px 50px rgba(0,0,0,.08);
+  transition: .3s;
   display: flex;
   flex-direction: column;
 }
@@ -78,40 +94,38 @@ header p {
 }
 
 .card .info {
-  padding: 20px;
-  flex: 1;
+  padding: 22px;
 }
 
 .card h3 {
-  margin: 0;
   font-size: 18px;
+  margin: 0;
 }
 
 .card button {
-  margin-top: 15px;
+  margin-top: 18px;
   width: 100%;
+  padding: 14px;
   background: linear-gradient(135deg, #d4af37, #f5d76e);
   border: none;
-  padding: 14px;
   border-radius: 14px;
   font-weight: 600;
   cursor: pointer;
-  font-size: 15px;
 }
 
-/* CARRINHO */
+/* CARRINHO PREMIUM */
 #carrinho {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  bottom: 25px;
+  right: 25px;
   background: #111;
   color: #fff;
-  padding: 14px 20px;
-  border-radius: 50px;
-  font-size: 14px;
+  padding: 16px 24px;
+  border-radius: 100px;
+  font-size: 15px;
   cursor: pointer;
-  box-shadow: 0 15px 40px rgba(0,0,0,.25);
-  z-index: 999;
+  box-shadow: 0 20px 50px rgba(0,0,0,.3);
+  z-index: 9999;
 }
 </style>
 </head>
@@ -120,42 +134,49 @@ header p {
 
 <header>
   <h1>Odòmáiyá Artigos Religiosos</h1>
-  <p>Artigos religiosos com fundamento, tradição e respeito. Atendimento profissional online e presencial.</p>
+  <p>Referência em artigos religiosos com fundamento, tradição e respeito. Atendimento profissional online e presencial.</p>
 </header>
 
-<div id="carrinho">🛒 Pedido: <span id="qtd">0</span> itens</div>
-
 <div class="container">
-  <h2 class="section-title">Catálogo de Produtos</h2>
+
+  <!-- CATEGORIAS -->
+  <div class="categorias">
+    <div class="categoria">🕯️ Velas</div>
+    <div class="categoria">📿 Guias</div>
+    <div class="categoria">🗿 Imagens</div>
+    <div class="categoria">🌿 Ervas</div>
+    <div class="categoria">🔥 Incensos</div>
+    <div class="categoria">✨ Kits Espirituais</div>
+  </div>
+
+  <h2 class="section-title">Produtos em Destaque</h2>
+
   <div class="grid" id="listaProdutos"></div>
 </div>
+
+<div id="carrinho">🛒 Pedido: <span id="qtd">0</span> itens</div>
 
 <script>
 const produtos = [
   "Vela 7 dias branca",
   "Vela 7 dias vermelha",
-  "Vela preta Exu",
   "Vela dourada Oxum",
-  "Incenso artesanal",
-  "Defumador espiritual",
-  "Ervas ritualísticas",
-  "Pemba consagrada",
-  "Guia de Oxalá",
-  "Guia de Ogum",
+  "Incenso artesanal premium",
+  "Guia de Oxalá luxo",
   "Guia de Pombagira",
-  "Imagem Exu Tranca Ruas",
-  "Imagem Pombagira Maria Padilha",
-  "Imagem Oxalá 30cm",
-  "Imagem Ogum guerreiro",
+  "Imagem Exu Tranca Ruas 30cm",
+  "Imagem Maria Padilha",
+  "Kit limpeza espiritual",
+  "Kit prosperidade",
+  "Ervas ritualísticas",
+  "Defumador consagrado",
   "Colar proteção espiritual",
-  "Kit firmeza espiritual",
-  "Kit limpeza energética",
-  "Perfume ritualístico",
-  "Óleo consagrado"
+  "Perfume espiritual",
+  "Óleo consagrado",
+  "Pemba consagrada"
 ];
 
 let carrinho = [];
-
 const lista = document.getElementById("listaProdutos");
 
 produtos.forEach((nome,i)=>{
