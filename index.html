@@ -5,91 +5,113 @@
 <title>Odòmáiyá Artigos Religiosos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #0f0f0f;
-  color: #fff;
+  background: #f9fafb;
+  color: #111;
 }
 
+/* TOPO */
 header {
-  background: linear-gradient(135deg, #000, #1a1a1a);
-  padding: 60px 20px;
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  padding: 70px 20px;
   text-align: center;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 header h1 {
-  font-size: 42px;
-  letter-spacing: 2px;
+  font-size: 44px;
+  font-weight: 700;
 }
 
 header p {
-  color: #ccc;
-  max-width: 700px;
+  color: #555;
+  max-width: 720px;
   margin: 10px auto 0;
+  font-size: 17px;
 }
 
-.produtos {
-  padding: 50px 20px;
+/* CONTAINER */
+.container {
   max-width: 1200px;
   margin: auto;
+  padding: 50px 20px;
 }
 
+/* TÍTULO */
+.section-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+/* GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
 }
 
+/* CARD PRODUTO */
 .card {
-  background: #151515;
-  border-radius: 20px;
+  background: #fff;
+  border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,.6);
-  transition: .3s;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+  transition: .3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0,0,0,.12);
 }
 
 .card img {
   width: 100%;
-  height: 220px;
+  height: 230px;
   object-fit: cover;
 }
 
 .card .info {
-  padding: 15px;
+  padding: 20px;
+  flex: 1;
 }
 
 .card h3 {
   margin: 0;
+  font-size: 18px;
 }
 
 .card button {
-  margin-top: 10px;
+  margin-top: 15px;
   width: 100%;
-  background: linear-gradient(135deg, gold, orange);
+  background: linear-gradient(135deg, #d4af37, #f5d76e);
   border: none;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: bold;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
   cursor: pointer;
+  font-size: 15px;
 }
 
+/* CARRINHO */
 #carrinho {
   position: fixed;
   top: 20px;
-  left: 20px;
-  background: #000;
-  padding: 15px;
-  border-radius: 15px;
-  z-index: 999;
+  right: 20px;
+  background: #111;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 50px;
   font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 15px 40px rgba(0,0,0,.25);
+  z-index: 999;
 }
 </style>
 </head>
@@ -101,39 +123,48 @@ header p {
   <p>Artigos religiosos com fundamento, tradição e respeito. Atendimento profissional online e presencial.</p>
 </header>
 
-<div id="carrinho">🛒 Carrinho: <span id="qtd">0</span> itens</div>
+<div id="carrinho">🛒 Pedido: <span id="qtd">0</span> itens</div>
 
-<section class="produtos">
+<div class="container">
+  <h2 class="section-title">Catálogo de Produtos</h2>
   <div class="grid" id="listaProdutos"></div>
-</section>
+</div>
 
 <script>
 const produtos = [
-  {nome:"Vela 7 dias branca", img:"https://picsum.photos/400?1"},
-  {nome:"Vela preta Exu", img:"https://picsum.photos/400?2"},
-  {nome:"Guia de Oxalá", img:"https://picsum.photos/400?3"},
-  {nome:"Guia de Pombagira", img:"https://picsum.photos/400?4"},
-  {nome:"Imagem Exu Tranca Ruas", img:"https://picsum.photos/400?5"},
-  {nome:"Imagem Pombagira Maria Padilha", img:"https://picsum.photos/400?6"},
-  {nome:"Defumador espiritual", img:"https://picsum.photos/400?7"},
-  {nome:"Incenso artesanal", img:"https://picsum.photos/400?8"},
-  {nome:"Ervas ritualísticas", img:"https://picsum.photos/400?9"},
-  {nome:"Pemba consagrada", img:"https://picsum.photos/400?10"},
-  {nome:"Colar proteção espiritual", img:"https://picsum.photos/400?11"},
-  {nome:"Kit firmeza espiritual", img:"https://picsum.photos/400?12"}
+  "Vela 7 dias branca",
+  "Vela 7 dias vermelha",
+  "Vela preta Exu",
+  "Vela dourada Oxum",
+  "Incenso artesanal",
+  "Defumador espiritual",
+  "Ervas ritualísticas",
+  "Pemba consagrada",
+  "Guia de Oxalá",
+  "Guia de Ogum",
+  "Guia de Pombagira",
+  "Imagem Exu Tranca Ruas",
+  "Imagem Pombagira Maria Padilha",
+  "Imagem Oxalá 30cm",
+  "Imagem Ogum guerreiro",
+  "Colar proteção espiritual",
+  "Kit firmeza espiritual",
+  "Kit limpeza energética",
+  "Perfume ritualístico",
+  "Óleo consagrado"
 ];
 
 let carrinho = [];
 
 const lista = document.getElementById("listaProdutos");
 
-produtos.forEach((p,i)=>{
+produtos.forEach((nome,i)=>{
   lista.innerHTML += `
     <div class="card">
-      <img src="${p.img}">
+      <img src="https://picsum.photos/500?random=${i}">
       <div class="info">
-        <h3>${p.nome}</h3>
-        <button onclick="add('${p.nome}')">Adicionar ao pedido</button>
+        <h3>${nome}</h3>
+        <button onclick="add('${nome}')">Adicionar ao pedido</button>
       </div>
     </div>
   `;
@@ -143,7 +174,11 @@ function add(nome){
   carrinho.push(nome);
   document.getElementById("qtd").innerText = carrinho.length;
 
-  const texto = encodeURIComponent("Olá! Gostaria de fazer um pedido:\n\n" + carrinho.map(i=>"• "+i).join("\n"));
+  const texto = encodeURIComponent(
+    "Olá! Gostaria de fazer um pedido na Odòmáiyá:\n\n" +
+    carrinho.map(i=>"• "+i).join("\n")
+  );
+
   document.getElementById("carrinho").onclick = () => {
     window.open("https://wa.me/5554996048808?text="+texto);
   };
