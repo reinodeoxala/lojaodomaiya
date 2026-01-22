@@ -1,302 +1,153 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <title>Odòmáiyá Artigos Religiosos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Odòmáiyá Artigos Religiosos – Loja de artigos espirituais com respeito, fundamento e tradição. Velas, incensos, imagens, guias, banhos e muito mais.">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
---azul-escuro:#0c2d48;
---azul:#174e7a;
---azul-claro:#2f74a8;
---cinza:#f2f4f8;
---branco:#ffffff;
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0f0f0f;
+  color: #fff;
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-font-family:Poppins,sans-serif;
-background:var(--cinza);
-color:#222;
+header {
+  background: linear-gradient(135deg, #000, #1a1a1a);
+  padding: 60px 20px;
+  text-align: center;
 }
 
-/* HEADER */
-header{
-background:linear-gradient(135deg,#081e33,#0c2d48,#174e7a);
-color:white;
-text-align:center;
-padding:80px 20px;
+header h1 {
+  font-size: 42px;
+  letter-spacing: 2px;
 }
 
-header img{
-max-width:140px;
-margin-bottom:25px;
+header p {
+  color: #ccc;
+  max-width: 700px;
+  margin: 10px auto 0;
 }
 
-header h1{
-font-size:42px;
-font-weight:600;
-letter-spacing:1px;
+.produtos {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-header p{
-max-width:800px;
-margin:20px auto 0;
-opacity:.95;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
 }
 
-/* SOBRE */
-.sobre{
-background:white;
-max-width:1100px;
-margin:-40px auto 60px;
-padding:50px;
-border-radius:20px;
-box-shadow:0 15px 40px rgba(0,0,0,.08);
-text-align:center;
+.card {
+  background: #151515;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,.6);
+  transition: .3s;
 }
 
-.sobre h2{
-color:var(--azul);
-margin-bottom:20px;
+.card:hover {
+  transform: translateY(-5px);
 }
 
-/* CATEGORIAS */
-.categorias{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin:30px 20px 10px;
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
 }
 
-.categorias button{
-background:white;
-border:1px solid #ddd;
-padding:10px 22px;
-border-radius:30px;
-cursor:pointer;
-transition:.3s;
+.card .info {
+  padding: 15px;
 }
 
-.categorias button:hover{
-background:var(--azul);
-color:white;
+.card h3 {
+  margin: 0;
 }
 
-/* PRODUTOS */
-.produtos{
-max-width:1200px;
-margin:30px auto 80px;
-padding:0 20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:25px;
+.card button {
+  margin-top: 10px;
+  width: 100%;
+  background: linear-gradient(135deg, gold, orange);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.produto{
-background:white;
-border-radius:18px;
-padding:20px;
-box-shadow:0 10px 30px rgba(0,0,0,.07);
-display:flex;
-flex-direction:column;
-}
-
-.produto img{
-border-radius:14px;
-margin-bottom:12px;
-}
-
-.produto h3{
-font-size:16px;
-margin-bottom:5px;
-}
-
-.produto p{
-font-size:14px;
-opacity:.7;
-margin-bottom:10px;
-}
-
-.produto span{
-font-weight:bold;
-color:var(--azul);
-margin-bottom:12px;
-}
-
-.produto button{
-margin-top:auto;
-background:var(--azul);
-color:white;
-border:none;
-padding:10px;
-border-radius:30px;
-cursor:pointer;
-transition:.3s;
-}
-
-.produto button:hover{
-background:black;
-}
-
-/* CARRINHO */
-.carrinho{
-position:fixed;
-top:20px;
-right:20px;
-background:white;
-padding:12px 20px;
-border-radius:40px;
-box-shadow:0 8px 20px rgba(0,0,0,.2);
-cursor:pointer;
-font-weight:bold;
-}
-
-/* WHATSAPP */
-.whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25d366;
-color:white;
-padding:15px;
-border-radius:50%;
-text-decoration:none;
-font-size:22px;
-box-shadow:0 8px 20px rgba(0,0,0,.3);
-}
-
-/* FOOTER */
-footer{
-background:#081e33;
-color:white;
-text-align:center;
-padding:60px 20px;
-}
-
-footer p{
-margin:8px 0;
-opacity:.9;
+#carrinho {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #000;
+  padding: 15px;
+  border-radius: 15px;
+  z-index: 999;
+  font-size: 14px;
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<img src="logo.png">
-<h1>Odòmáiyá Artigos Religiosos</h1>
-<p>Artigos espirituais escolhidos com respeito, fundamento e tradição.  
-Conectando fé, ancestralidade e luz espiritual em cada detalhe.</p>
+  <h1>Odòmáiyá Artigos Religiosos</h1>
+  <p>Artigos religiosos com fundamento, tradição e respeito. Atendimento profissional online e presencial.</p>
 </header>
 
-<section class="sobre">
-<h2>Sobre a Odòmáiyá</h2>
-<p>
-A Odòmáiyá Artigos Religiosos nasceu com o propósito de oferecer produtos que respeitam os fundamentos espirituais, a tradição e a fé.  
-Cada item é selecionado com cuidado para auxiliar sua caminhada espiritual com seriedade, respeito e qualidade.
-</p>
+<div id="carrinho">🛒 Carrinho: <span id="qtd">0</span> itens</div>
+
+<section class="produtos">
+  <div class="grid" id="listaProdutos"></div>
 </section>
 
-<div class="categorias">
-<button onclick="filtrar('todos')">Todos</button>
-<button onclick="filtrar('velas')">Velas</button>
-<button onclick="filtrar('incensos')">Incensos</button>
-<button onclick="filtrar('imagens')">Imagens</button>
-<button onclick="filtrar('banhos')">Banhos & Ervas</button>
-<button onclick="filtrar('guias')">Guias & Acessórios</button>
-</div>
-
-<div class="produtos" id="produtos"></div>
-
-<div class="carrinho" onclick="finalizarPedido()">
-🛒 Carrinho (<span id="qtd">0</span>)
-</div>
-
-<a class="whatsapp" href="https://wa.me/5554996048808" target="_blank">🟢</a>
-
-<footer>
-<h2>Contato Odòmáiyá</h2>
-<p>📍 Rua Cel. Mostardeiro – Boqueirão – Passo Fundo – RS</p>
-<p>📲 WhatsApp: (54) 99604-8808</p>
-<p>📷 Instagram: @odomaia_artigosreligiosos</p>
-<p style="margin-top:15px;">Axé, fé e luz ao seu caminho.</p>
-</footer>
-
 <script>
-const lista = [
-{nome:"Vela 7 dias branca",cat:"velas"},
-{nome:"Vela azul Oxalá",cat:"velas"},
-{nome:"Vela vermelha Exu",cat:"velas"},
-{nome:"Vela tricolor",cat:"velas"},
-{nome:"Vela palito colorida",cat:"velas"},
-
-{nome:"Incenso Arruda",cat:"incensos"},
-{nome:"Incenso Sete Ervas",cat:"incensos"},
-{nome:"Incenso Mirra",cat:"incensos"},
-{nome:"Defumador espiritual",cat:"incensos"},
-{nome:"Resina aromática",cat:"incensos"},
-
-{nome:"Imagem Exu Tranca Ruas",cat:"imagens"},
-{nome:"Imagem Pombogira Rainha",cat:"imagens"},
-{nome:"Imagem Preto Velho",cat:"imagens"},
-{nome:"Imagem Ogum",cat:"imagens"},
-{nome:"Imagem Oxum",cat:"imagens"},
-{nome:"Imagem Iemanjá",cat:"imagens"},
-
-{nome:"Banho abre caminhos",cat:"banhos"},
-{nome:"Banho descarrego",cat:"banhos"},
-{nome:"Banho proteção espiritual",cat:"banhos"},
-{nome:"Ervas secas consagradas",cat:"banhos"},
-
-{nome:"Guia Oxalá",cat:"guias"},
-{nome:"Guia Exu",cat:"guias"},
-{nome:"Guia Oxóssi",cat:"guias"},
-{nome:"Fio de contas",cat:"guias"},
-{nome:"Patuá proteção",cat:"guias"},
-{nome:"Veladora de vidro",cat:"guias"}
+const produtos = [
+  {nome:"Vela 7 dias branca", img:"https://picsum.photos/400?1"},
+  {nome:"Vela preta Exu", img:"https://picsum.photos/400?2"},
+  {nome:"Guia de Oxalá", img:"https://picsum.photos/400?3"},
+  {nome:"Guia de Pombagira", img:"https://picsum.photos/400?4"},
+  {nome:"Imagem Exu Tranca Ruas", img:"https://picsum.photos/400?5"},
+  {nome:"Imagem Pombagira Maria Padilha", img:"https://picsum.photos/400?6"},
+  {nome:"Defumador espiritual", img:"https://picsum.photos/400?7"},
+  {nome:"Incenso artesanal", img:"https://picsum.photos/400?8"},
+  {nome:"Ervas ritualísticas", img:"https://picsum.photos/400?9"},
+  {nome:"Pemba consagrada", img:"https://picsum.photos/400?10"},
+  {nome:"Colar proteção espiritual", img:"https://picsum.photos/400?11"},
+  {nome:"Kit firmeza espiritual", img:"https://picsum.photos/400?12"}
 ];
 
-let carrinho=[];
+let carrinho = [];
 
-function render(prod){
-const div=document.getElementById("produtos");
-div.innerHTML="";
-prod.forEach(p=>{
-div.innerHTML+=`
-<div class="produto">
-<img src="https://via.placeholder.com/400x250.png?text=Odòmáiyá">
-<h3>${p.nome}</h3>
-<p>Produto ilustrativo para catálogo</p>
-<span>Disponível</span>
-<button onclick="adicionar('${p.nome}')">Adicionar ao carrinho</button>
-</div>`;
+const lista = document.getElementById("listaProdutos");
+
+produtos.forEach((p,i)=>{
+  lista.innerHTML += `
+    <div class="card">
+      <img src="${p.img}">
+      <div class="info">
+        <h3>${p.nome}</h3>
+        <button onclick="add('${p.nome}')">Adicionar ao pedido</button>
+      </div>
+    </div>
+  `;
 });
-}
 
-function filtrar(cat){
-if(cat=="todos") render(lista);
-else render(lista.filter(p=>p.cat==cat));
-}
+function add(nome){
+  carrinho.push(nome);
+  document.getElementById("qtd").innerText = carrinho.length;
 
-function adicionar(nome){
-carrinho.push(nome);
-document.getElementById("qtd").innerText=carrinho.length;
+  const texto = encodeURIComponent("Olá! Gostaria de fazer um pedido:\n\n" + carrinho.map(i=>"• "+i).join("\n"));
+  document.getElementById("carrinho").onclick = () => {
+    window.open("https://wa.me/5554996048808?text="+texto);
+  };
 }
-
-function finalizarPedido(){
-if(carrinho.length==0){alert("Carrinho vazio");return;}
-let texto="Olá! Gostaria de fazer um pedido:%0A";
-carrinho.forEach(i=>texto+="- "+i+"%0A");
-window.open("https://wa.me/5554996048808?text="+texto);
-}
-
-render(lista);
 </script>
 
 </body>
