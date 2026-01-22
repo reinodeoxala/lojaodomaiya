@@ -3,58 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odòmáiyá | Artigos Religiosos</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Odòmáiyá | Loja Oficial de Artigos Religiosos</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,sans-serif;background:#f8f9fb;color:#111}
+body{font-family:Inter,sans-serif;background:#fafafa;color:#111}
 
 /* HEADER */
-header{background:#fff;position:sticky;top:0;z-index:100;border-bottom:1px solid #eee}
-.nav{max-width:1300px;margin:auto;padding:20px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:800;font-size:26px}
-.menu a{text-decoration:none;color:#333;margin-left:25px;font-weight:500}
+header{background:#fff;position:sticky;top:0;z-index:999;border-bottom:1px solid #eee}
+.nav{max-width:1400px;margin:auto;padding:22px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:Playfair Display,serif;font-size:28px;font-weight:700;letter-spacing:.5px}
+.menu a{text-decoration:none;color:#444;margin-left:30px;font-weight:500;font-size:15px}
 
 /* HERO */
-.hero{background:linear-gradient(135deg,#ffffff,#f1f5f9);padding:100px 20px;text-align:center}
-.hero h1{font-size:54px;font-weight:800}
-.hero p{margin-top:15px;color:#666;font-size:18px}
-.hero .busca{margin:35px auto;max-width:500px}
-.hero input{width:100%;padding:18px;border-radius:999px;border:1px solid #ddd;font-size:16px}
+.hero{background:linear-gradient(135deg,#ffffff,#f4f6f9);padding:120px 20px;text-align:center}
+.hero h1{font-family:Playfair Display,serif;font-size:56px;font-weight:600;max-width:900px;margin:auto}
+.hero p{margin-top:18px;color:#666;font-size:18px;max-width:700px;margin-inline:auto}
+.hero .busca{margin:40px auto;max-width:520px}
+.hero input{width:100%;padding:18px 26px;border-radius:999px;border:1px solid #ddd;font-size:15px}
 
-/* CONTAINER */
-.container{max-width:1300px;margin:auto;padding:60px 20px}
-
-/* TITULOS */
-.section-title{text-align:center;margin-bottom:40px}
-.section-title h2{font-size:36px}
-.section-title p{color:#777;margin-top:10px}
+/* SEÇÕES */
+.container{max-width:1400px;margin:auto;padding:80px 20px}
+.section-title{text-align:center;margin-bottom:60px}
+.section-title h2{font-family:Playfair Display,serif;font-size:42px;font-weight:600}
+.section-title p{margin-top:12px;color:#777;font-size:16px}
 
 /* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
-.card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.06);transition:.3s}
-.card:hover{transform:translateY(-5px)}
-.card img{width:100%;height:220px;object-fit:cover}
-.info{padding:20px}
-.info h3{font-size:17px}
-.info span{color:#777;font-size:14px}
-.preco{margin:10px 0;font-weight:700}
-.info button{width:100%;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#d4af37,#f5d76e);font-weight:600;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:35px}
+.card{background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.04);transition:.35s}
+.card:hover{transform:translateY(-6px)}
+.card img{width:100%;height:240px;object-fit:cover}
+.info{padding:24px}
+.info h3{font-size:17px;font-weight:600}
+.info span{color:#999;font-size:13px}
+.preco{margin:10px 0;font-weight:600;color:#333}
+.info button{margin-top:10px;width:100%;padding:14px;border:none;border-radius:14px;background:#111;color:#fff;font-size:14px;cursor:pointer}
 
-/* CARRINHO */
-.cart-btn{position:fixed;bottom:25px;right:25px;background:#111;color:#fff;padding:16px 28px;border-radius:999px;cursor:pointer;box-shadow:0 20px 40px rgba(0,0,0,.3)}
-.cart-panel{position:fixed;top:0;right:-100%;width:380px;height:100%;background:#fff;box-shadow:-10px 0 40px rgba(0,0,0,.2);transition:.4s;padding:25px;z-index:999;overflow:auto}
-.cart-panel.open{right:0}
+/* COLEÇÕES */
+.collections{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px}
+.collection{background:#fff;border-radius:30px;padding:50px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.05)}
+.collection h3{font-family:Playfair Display,serif;font-size:28px}
+.collection p{margin-top:10px;color:#777}
 
 /* FOOTER */
-footer{background:#fff;border-top:1px solid #eee;padding:50px 20px}
-.footer-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
-footer h4{margin-bottom:15px}
-footer p{color:#666;font-size:14px}
+footer{background:#fff;border-top:1px solid #eee}
+.footer-grid{max-width:1300px;margin:auto;padding:70px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px}
+footer h4{font-size:17px;margin-bottom:15px}
+footer p{color:#666;font-size:14px;line-height:1.6}
 
-/* WHATSAPP */
-.whats{position:fixed;left:25px;bottom:25px;background:#25d366;color:#fff;padding:16px 24px;border-radius:999px;font-weight:600;text-decoration:none;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+/* BOTÃO WHATSAPP */
+.whatsapp-float{
+  position:fixed;
+  bottom:25px;
+  left:25px;
+  padding:16px 26px;
+  border-radius:16px;
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  max-width:300px;
+  line-height:1.5;
+  z-index:9999;
+}
+.whatsapp-online{background:#16a34a;color:#fff}
+.whatsapp-offline{background:#facc15;color:#111}
 </style>
 </head>
 <body>
@@ -64,7 +79,8 @@ footer p{color:#666;font-size:14px}
     <div class="logo">Odòmáiyá</div>
     <div class="menu">
       <a href="#">Início</a>
-      <a href="#produtos">Produtos</a>
+      <a href="#colecoes">Coleções</a>
+      <a href="#produtos">Catálogo</a>
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
     </div>
@@ -73,16 +89,28 @@ footer p{color:#666;font-size:14px}
 
 <section class="hero">
   <h1>Loja Oficial Odòmáiyá</h1>
-  <p>Artigos religiosos com fundamento, tradição e excelência no atendimento</p>
+  <p>Artigos religiosos com curadoria, respeito espiritual e excelência no atendimento.</p>
   <div class="busca">
     <input placeholder="Buscar produtos...">
   </div>
 </section>
 
+<section class="container" id="colecoes">
+  <div class="section-title">
+    <h2>Coleções Espirituais</h2>
+    <p>Linhas cuidadosamente organizadas para cada necessidade espiritual</p>
+  </div>
+  <div class="collections">
+    <div class="collection"><h3>Proteção Espiritual</h3><p>Guias, velas, kits e elementos de firmeza.</p></div>
+    <div class="collection"><h3>Prosperidade & Caminhos</h3><p>Artigos voltados à abertura e prosperidade.</p></div>
+    <div class="collection"><h3>Curadoria Odòmáiyá</h3><p>Seleção especial com alto padrão espiritual.</p></div>
+  </div>
+</section>
+
 <section class="container" id="produtos">
   <div class="section-title">
-    <h2>Catálogo de Produtos</h2>
-    <p>Produtos selecionados para atender com respeito e qualidade</p>
+    <h2>Catálogo</h2>
+    <p>Produtos ilustrativos para apresentação profissional</p>
   </div>
   <div class="grid" id="lista"></div>
 </section>
@@ -90,10 +118,10 @@ footer p{color:#666;font-size:14px}
 <section class="container" id="sobre">
   <div class="section-title">
     <h2>Sobre a Odòmáiyá</h2>
-    <p>Tradição, ética e compromisso espiritual</p>
+    <p>Tradição, ética e responsabilidade espiritual</p>
   </div>
   <p style="max-width:900px;margin:auto;color:#666;text-align:center">
-    A Odòmáiyá Artigos Religiosos nasceu com o propósito de oferecer produtos com respeito, fundamento e responsabilidade espiritual. Nosso atendimento é humanizado, profissional e comprometido com cada cliente.
+    A Odòmáiyá Artigos Religiosos é uma loja dedicada à excelência espiritual, oferecendo produtos com respeito, fundamento e seriedade. Nosso compromisso é proporcionar um atendimento humanizado, profissional e alinhado com os valores tradicionais das religiões de matriz africana.
   </p>
 </section>
 
@@ -105,50 +133,65 @@ footer p{color:#666;font-size:14px}
       <p>Instagram: @odomaia_artigosreligiosos</p>
     </div>
     <div>
-      <h4>Horário de atendimento</h4>
+      <h4>Atendimento</h4>
       <p>Online e presencial</p>
       <p>10h–12h | 13h30–19h</p>
     </div>
     <div>
       <h4>Endereço</h4>
-      <p>Endereço comercial da loja física</p>
+      <p>Loja física — Passo Fundo / RS</p>
     </div>
   </div>
 </footer>
 
-<a class="whats" href="https://wa.me/5554996048808" target="_blank">Fale com um vendedor</a>
+<a id="whatsappButton" href="#" target="_blank" class="whatsapp-float"></a>
 
 <script>
 const produtos = [
-"Vela branca 7 dias","Vela preta Exu","Vela dourada Oxum","Incenso artesanal","Defumador espiritual",
-"Imagem Exu Tranca Ruas","Imagem Maria Padilha","Imagem Ogum","Imagem Oxalá","Imagem Oxum",
-"Guia de Oxalá","Guia de proteção","Guia de Pombagira","Colar espiritual","Pulseira energética",
-"Kit limpeza espiritual","Kit prosperidade","Kit proteção","Pemba consagrada","Ervas ritualísticas",
-"Perfume espiritual","Óleo consagrado","Pó de firmeza","Pó de atração","Banho de descarrego",
-"Banho de prosperidade","Sabonete energético","Amuleto proteção","Talismã prosperidade"
+"Vela 7 dias branca","Vela ritualística dourada","Incenso artesanal premium","Imagem Exu Tranca Ruas",
+"Imagem Pombagira Maria Padilha","Imagem Oxalá","Imagem Oxum","Guia consagrada Oxalá",
+"Guia proteção espiritual","Colar energético","Pulseira proteção","Kit limpeza espiritual",
+"Kit prosperidade espiritual","Defumador artesanal","Ervas ritualísticas selecionadas",
+"Pemba consagrada","Perfume espiritual","Óleo consagrado","Banho energético","Amuleto proteção"
 ];
 
 const lista = document.getElementById("lista");
 produtos.forEach((p,i)=>{
  lista.innerHTML+=`
   <div class="card">
-    <img src="https://picsum.photos/500?random=${i}">
+    <img src="https://picsum.photos/600?random=${i}">
     <div class="info">
       <h3>${p}</h3>
       <span>Produto ilustrativo</span>
-      <div class="preco">Consulte valor</div>
+      <div class="preco">Atendimento personalizado</div>
       <button onclick="pedido('${p}')">Adicionar ao pedido</button>
     </div>
   </div>
  `;
 });
 
-let carrinho=[];
-function pedido(p){
- carrinho.push(p);
- alert("Produto adicionado ao pedido!");
-}
+function pedido(p){ alert(p+" adicionado ao pedido."); }
 
+// BOTÃO INTELIGENTE
+const numero="5554996048808";
+const botao=document.getElementById("whatsappButton");
+
+function atualizar(){
+ const agora=new Date();
+ const min=agora.getHours()*60+agora.getMinutes();
+ const ativo=(min>=600&&min<=720)||(min>=810&&min<=1140);
+
+ if(ativo){
+  botao.className="whatsapp-float whatsapp-online";
+  botao.href=`https://wa.me/${numero}`;
+  botao.innerHTML="💬 Atendimento online agora<br>Fale com um consultor Odòmáiyá";
+ } else {
+  botao.className="whatsapp-float whatsapp-offline";
+  botao.href=`https://wa.me/${numero}`;
+  botao.innerHTML="⚠️ Atendimento retorna às 10h<br>Envie seu pedido que concluímos assim que voltarmos ✅";
+ }
+}
+atualizar(); setInterval(atualizar,60000);
 </script>
 
 </body>
