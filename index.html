@@ -5,154 +5,180 @@
 <title>Odòmáiyá Artigos Religiosos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 :root{
 --azul:#0b2c4a;
---azul-claro:#174d7a;
---prata:#d9d9d9;
---fundo:#f6f8fb;
+--verde:#25d366;
+--fundo:#f4f6fa;
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
 font-family:Montserrat,sans-serif;
 background:var(--fundo);
-color:#222;
+padding-bottom:120px;
 }
 
+/* HEADER APP */
 header{
-background:linear-gradient(135deg,#071d33,#0b2c4a,#174d7a);
+background:linear-gradient(135deg,#071d33,#0b2c4a);
 color:white;
+padding:20px;
 text-align:center;
-padding:70px 20px;
-}
-
-header img{
-max-width:140px;
-margin-bottom:20px;
+border-radius:0 0 25px 25px;
 }
 
 header h1{
-font-size:36px;
-letter-spacing:2px;
+font-size:22px;
+margin-bottom:6px;
 }
 
 header p{
-max-width:700px;
-margin:20px auto;
+font-size:14px;
 opacity:.9;
 }
 
+/* CATEGORIAS */
 .categorias{
 display:flex;
-gap:15px;
-justify-content:center;
-flex-wrap:wrap;
-margin:40px 20px;
+overflow-x:auto;
+gap:10px;
+padding:15px;
 }
 
 .categorias button{
-padding:10px 22px;
-border:none;
+flex:none;
+padding:10px 18px;
 border-radius:30px;
+border:none;
 background:white;
-border:1px solid var(--prata);
-cursor:pointer;
-transition:.3s;
+box-shadow:0 4px 10px rgba(0,0,0,.1);
+font-size:14px;
 }
 
-.categorias button:hover{
-background:var(--azul-claro);
-color:white;
-}
-
+/* PRODUTOS */
 .produtos{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:25px;
-max-width:1200px;
-margin:0 auto 80px;
-padding:0 20px;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+padding:15px;
 }
 
 .produto{
 background:white;
-border-radius:16px;
-box-shadow:0 10px 20px rgba(0,0,0,.1);
-padding:20px;
+border-radius:18px;
+padding:12px;
+box-shadow:0 6px 18px rgba(0,0,0,.15);
 display:flex;
 flex-direction:column;
-justify-content:space-between;
 }
 
 .produto img{
 width:100%;
-border-radius:12px;
-margin-bottom:10px;
-}
-
-.produto h3{
-font-size:16px;
+border-radius:14px;
 margin-bottom:8px;
 }
 
-.produto span{
-font-weight:bold;
-color:var(--azul-claro);
-margin-bottom:12px;
-display:block;
+.produto h3{
+font-size:14px;
+margin-bottom:4px;
+}
+
+.preco{
+color:var(--azul);
+font-weight:600;
+margin-bottom:6px;
+}
+
+.qtd{
+display:flex;
+gap:6px;
+margin-bottom:8px;
+}
+
+.qtd input{
+width:60px;
+padding:6px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 .produto button{
-padding:10px;
-border:none;
-border-radius:25px;
 background:var(--azul);
 color:white;
-cursor:pointer;
-transition:.3s;
+border:none;
+border-radius:25px;
+padding:10px;
+font-size:14px;
 }
 
-.produto button:hover{
-background:#000;
+/* CARRINHO FIXO */
+.carrinho{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+border-radius:25px 25px 0 0;
+box-shadow:0 -8px 25px rgba(0,0,0,.3);
+padding:15px;
 }
 
+.carrinho h3{
+font-size:16px;
+margin-bottom:6px;
+}
+
+.carrinho ul{
+list-style:none;
+max-height:100px;
+overflow:auto;
+font-size:13px;
+margin-bottom:8px;
+}
+
+.total{
+font-weight:600;
+margin-bottom:10px;
+}
+
+.carrinho button{
+width:100%;
+background:var(--verde);
+border:none;
+color:white;
+padding:14px;
+font-size:15px;
+border-radius:30px;
+}
+
+/* WHATSAPP FLOAT */
 .whatsapp-float{
 position:fixed;
-bottom:20px;
+top:20px;
 right:20px;
-background:#25d366;
-color:white;
-padding:15px 18px;
+background:var(--verde);
+width:50px;
+height:50px;
 border-radius:50%;
-font-size:22px;
-text-decoration:none;
-box-shadow:0 8px 20px rgba(0,0,0,.3);
-}
-
-footer{
-background:#071d33;
+display:flex;
+align-items:center;
+justify-content:center;
 color:white;
-text-align:center;
-padding:60px 20px;
-}
-
-footer p{
-margin:8px 0;
-opacity:.9;
+font-size:22px;
+box-shadow:0 6px 20px rgba(0,0,0,.3);
 }
 </style>
 </head>
 <body>
 
 <header>
-<img src="logo.png">
-<h1>Odòmáiyá Artigos Religiosos</h1>
-<p>Artigos espirituais selecionados com respeito, fundamento e tradição.  
-Cada produto escolhido para fortalecer sua fé e sua conexão com o sagrado.</p>
+<h1>Odòmáiyá</h1>
+<p>Artigos religiosos com fundamento e axé</p>
 </header>
 
 <div class="categorias">
@@ -160,70 +186,93 @@ Cada produto escolhido para fortalecer sua fé e sua conexão com o sagrado.</p>
 <button onclick="filtrar('velas')">Velas</button>
 <button onclick="filtrar('incensos')">Incensos</button>
 <button onclick="filtrar('imagens')">Imagens</button>
-<button onclick="filtrar('banhos')">Banhos & Ervas</button>
-<button onclick="filtrar('guias')">Guias & Fios</button>
+<button onclick="filtrar('banhos')">Banhos</button>
+<button onclick="filtrar('guias')">Guias</button>
 </div>
 
 <div class="produtos" id="produtos"></div>
 
-<footer>
-<h2>Contato Odòmáiyá</h2>
-<p>📍 Rua Cel. Mostardeiro, Boqueirão, Passo Fundo - RS</p>
-<p>📲 WhatsApp: (54) 99604-8808</p>
-<p>📷 Instagram: @odomaia_artigosreligiosos</p>
-<p style="margin-top:20px;">Axé, fé e luz ao seu caminho.</p>
-</footer>
+<div class="carrinho">
+<h3>🛒 Carrinho</h3>
+<ul id="lista"></ul>
+<div class="total" id="total"></div>
+<button onclick="finalizar()">Finalizar no WhatsApp</button>
+</div>
 
-<a class="whatsapp-float" href="https://wa.me/5554996048808" target="_blank">🟢</a>
+<a class="whatsapp-float" href="https://wa.me/5554996048808" target="_blank">
+<i class="fab fa-whatsapp"></i>
+</a>
 
 <script>
 const produtos = [
-{nome:"Vela 7 dias branca",cat:"velas"},
-{nome:"Vela azul Oxalá",cat:"velas"},
-{nome:"Vela preta Exu",cat:"velas"},
-{nome:"Incenso Arruda",cat:"incensos"},
-{nome:"Incenso Mirra",cat:"incensos"},
-{nome:"Incenso Sete Ervas",cat:"incensos"},
-{nome:"Imagem Exu Tranca Ruas",cat:"imagens"},
-{nome:"Imagem Pombogira Rainha",cat:"imagens"},
-{nome:"Imagem Oxum dourada",cat:"imagens"},
-{nome:"Imagem Ogum guerreiro",cat:"imagens"},
-{nome:"Banho abre caminhos",cat:"banhos"},
-{nome:"Banho descarrego",cat:"banhos"},
-{nome:"Ervas secas consagradas",cat:"banhos"},
-{nome:"Guia Oxóssi",cat:"guias"},
-{nome:"Guia Exu preta e vermelha",cat:"guias"},
-{nome:"Fio de contas Oxalá",cat:"guias"},
-{nome:"Patuá proteção",cat:"guias"},
-{nome:"Defumador espiritual",cat:"incensos"},
-{nome:"Vela tricolor",cat:"velas"},
-{nome:"Imagem Preto Velho",cat:"imagens"},
+{nome:"Vela 7 dias branca",cat:"velas",preco:15},
+{nome:"Vela azul Oxalá",cat:"velas",preco:18},
+{nome:"Incenso Arruda",cat:"incensos",preco:12},
+{nome:"Imagem Exu Tranca Ruas",cat:"imagens",preco:120},
+{nome:"Banho abre caminhos",cat:"banhos",preco:25},
+{nome:"Guia Oxóssi",cat:"guias",preco:80},
 ];
+
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
 function render(lista){
 const div = document.getElementById("produtos");
 div.innerHTML="";
-lista.forEach(p=>{
+lista.forEach((p,i)=>{
 div.innerHTML+=`
 <div class="produto">
 <img src="https://via.placeholder.com/300x200.png?text=Odòmáiyá">
 <h3>${p.nome}</h3>
-<span>Produto ilustrativo</span>
-<button onclick="pedido('${p.nome}')">Pedir no WhatsApp</button>
+<div class="preco">R$ ${p.preco.toFixed(2)}</div>
+<div class="qtd">
+<input type="number" min="1" value="1" id="q${i}">
+</div>
+<button onclick="add('${p.nome}',${p.preco},${i})">Adicionar</button>
 </div>`;
 });
 }
 
+function add(nome,preco,i){
+const qtd = Number(document.getElementById("q"+i).value);
+carrinho.push({nome,preco,qtd});
+salvar();
+}
+
+function salvar(){
+localStorage.setItem("carrinho",JSON.stringify(carrinho));
+atualizar();
+}
+
+function atualizar(){
+const ul = document.getElementById("lista");
+const totalDiv = document.getElementById("total");
+ul.innerHTML="";
+let total=0;
+carrinho.forEach(p=>{
+total += p.preco * p.qtd;
+ul.innerHTML+=`<li>${p.nome} (${p.qtd}x)</li>`;
+});
+totalDiv.innerText = "Total: R$ " + total.toFixed(2);
+}
+
+function finalizar(){
+let texto="Olá! Gostaria de fazer o pedido:%0A%0A";
+let total=0;
+carrinho.forEach(p=>{
+texto+=`- ${p.nome} (${p.qtd}x) R$ ${(p.preco*p.qtd).toFixed(2)}%0A`;
+total+=p.preco*p.qtd;
+});
+texto+=`%0ATotal: R$ ${total.toFixed(2)}`;
+window.open("https://wa.me/5554996048808?text="+texto);
+}
+
 function filtrar(cat){
-if(cat=="todos"){render(produtos)}
+if(cat=="todos") render(produtos);
 else render(produtos.filter(p=>p.cat==cat));
 }
 
-function pedido(nome){
-window.open("https://wa.me/5554996048808?text=Olá! Tenho interesse no produto: "+nome);
-}
-
 render(produtos);
+atualizar();
 </script>
 
 </body>
