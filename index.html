@@ -2,273 +2,149 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<title>Odòmáìyà Artigos Religiosos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odòmáìyà</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-}
-
-header {
-    background: #111;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 5px 0;
-}
-
-header a {
-    color: #25D366;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.info {
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.controls {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-}
-
-.controls input, .controls select {
-    flex: 1;
-    padding: 8px;
-}
-
-.tabs {
-    display: flex;
-    overflow-x: auto;
-    background: #222;
-}
-
-.tabs button {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    background: #222;
-    color: #fff;
-    cursor: pointer;
-}
-
-.tabs button.active {
-    background: #444;
-}
-
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 10px;
-    padding: 10px;
-}
-
-.card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-}
-
-.card img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.qty {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin: 5px 0;
-}
-
-.qty button {
-    padding: 5px 10px;
-}
-
-.cart {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #111;
-    color: #fff;
-    padding: 10px;
-}
-
-.cart-items {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.admin-login {
-    text-align: center;
-    font-size: 12px;
-    opacity: 0.4;
-    cursor: pointer;
-    margin: 10px;
-}
-
-.admin-panel {
-    display: none;
-    background: #fff;
-    padding: 10px;
-}
-
-.admin-panel input {
-    width: 100%;
-    margin: 3px 0;
-    padding: 5px;
-}
+body{font-family:Arial,Helvetica,sans-serif;background:#f6f8fb;margin:0}
+header{background:#0b2c4a;color:#fff;padding:20px;text-align:center}
+.produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:20px}
+.card{background:#fff;border-radius:12px;padding:15px;box-shadow:0 6px 16px rgba(0,0,0,.1)}
+.card h3{margin:0 0 8px}
+.card span{color:#0b2c4a;font-weight:bold}
+.controls{display:flex;gap:8px;margin-top:10px}
+.controls input{width:50px}
+button{border:none;border-radius:20px;padding:8px 14px;cursor:pointer}
+.add{background:#0b2c4a;color:#fff}
+.cart{position:fixed;bottom:20px;left:20px;background:#0b2c4a;color:#fff;padding:12px 18px;border-radius:30px}
+.admin-panel{display:none;padding:20px;background:#fff;margin:20px;border-radius:12px}
+.admin-logado .admin-panel{display:block}
+table{width:100%;border-collapse:collapse}
+td,th{padding:8px;border-bottom:1px solid #ddd}
+input[type=number]{width:80px}
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Odòmáìyà</h1>
-    <div class="info">
-        📍 <a href="https://www.google.com/maps/search/Rua+Sete+de+Agosto,+28,+Passo+Fundo+RS" target="_blank">
-        Rua Sete de Agosto, 28 – Passo Fundo/RS</a><br>
-        🕒 Seg a Sex: 10h–12h | 13:30–19h<br>
-        🕒 Sáb: 10h–12h | 13:30–17h<br>
-        📲 <a href="https://wa.me/55XXXXXXXXX" target="_blank">WhatsApp</a>
-    </div>
+<h1>Odòmáìyà Artigos Religiosos</h1>
+<p>📍 Rua Sete de Agosto, 28 – Passo Fundo/RS</p>
+<p>🕒 Seg–Sex: 10h–12h | 13:30–19h • Sáb: 10h–12h | 13:30–17h</p>
 </header>
 
-<div class="controls">
-    <input type="text" id="search" placeholder="Pesquisar item...">
-    <select id="order">
-        <option value="asc">Menor preço</option>
-        <option value="desc">Maior preço</option>
-    </select>
+<div class="produtos" id="listaProdutos"></div>
+
+<div class="cart" id="cartInfo">🛒 Carrinho: 0 itens</div>
+
+<!-- PAINEL ADMIN -->
+<div class="admin-panel">
+<h2>Painel Administrativo</h2>
+<input id="busca" placeholder="Buscar produto">
+<table>
+<thead>
+<tr><th>Produto</th><th>Preço</th><th>Estoque</th><th>Salvar</th></tr>
+</thead>
+<tbody id="adminTabela"></tbody>
+</table>
 </div>
 
-<div class="tabs" id="tabs"></div>
-<div class="products" id="products"></div>
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore, collection, doc, getDoc, getDocs,
+  runTransaction, updateDoc, setDoc, onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-<div class="cart">
-    🛒 Carrinho
-    <div class="cart-items" id="cartItems"></div>
-    <strong>Total: R$ <span id="total">0.00</span></strong>
-</div>
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_DOMINIO",
+  projectId: "SEU_PROJECT_ID",
+};
 
-<div class="admin-login" onclick="adminLogin()">admin</div>
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore();
 
-<div class="admin-panel" id="adminPanel">
-    <h3>Painel Admin</h3>
-    <input type="text" id="adminSearch" placeholder="Buscar item">
-    <div id="adminItems"></div>
-    <button onclick="saveAdmin()">Salvar alterações</button>
-</div>
+/* ================= ADMIN ================= */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return;
+  const phone = user.phoneNumber.replace("+","");
+  const adminSnap = await getDoc(doc(db,"admins",phone));
+  if (adminSnap.exists()) document.body.classList.add("admin-logado");
+});
 
-<script>
-let categories = ["Velas","Charutos","Ferramentas Exu","Ferramentas Quimbanda","Ferramentas Nação","Roupas"];
-let products = JSON.parse(localStorage.getItem("products")) || [
-    {id:1,name:"Vela 7 Dias",price:15,stock:20,cat:"Velas",img:"https://via.placeholder.com/200"},
-    {id:2,name:"Charuto Artesanal",price:35,stock:10,cat:"Charutos",img:"https://via.placeholder.com/200"},
-    {id:3,name:"Tridente Exu",price:120,stock:5,cat:"Ferramentas Exu",img:"https://via.placeholder.com/200"},
-    {id:4,name:"Punhal Quimbanda",price:150,stock:4,cat:"Ferramentas Quimbanda",img:"https://via.placeholder.com/200"},
-    {id:5,name:"Guia Nação",price:80,stock:12,cat:"Ferramentas Nação",img:"https://via.placeholder.com/200"},
-    {id:6,name:"Roupa Ritual",price:220,stock:6,cat:"Roupas",img:"https://via.placeholder.com/200"}
-];
+/* ================= PRODUTOS ================= */
+const lista = document.getElementById("listaProdutos");
+const cartInfo = document.getElementById("cartInfo");
+let carrinho = {};
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+onSnapshot(collection(db,"produtos"), snap => {
+  lista.innerHTML = "";
+  snap.forEach(docu => {
+    const p = docu.data();
+    lista.innerHTML += `
+      <div class="card">
+        <h3>${p.nome}</h3>
+        <span>R$ ${p.preco.toFixed(2)}</span><br>
+        Estoque: ${p.estoque}
+        <div class="controls">
+          <input type="number" min="1" value="1" id="q_${docu.id}">
+          <button class="add" onclick="addCarrinho('${docu.id}')">Adicionar</button>
+        </div>
+      </div>
+    `;
+  });
+});
 
-function renderTabs() {
-    const t = document.getElementById("tabs");
-    t.innerHTML = "";
-    categories.forEach(c=>{
-        let b=document.createElement("button");
-        b.innerText=c;
-        b.onclick=()=>renderProducts(c);
-        t.appendChild(b);
-    });
+/* ================= CARRINHO + BLOQUEIO ================= */
+window.addCarrinho = async (id) => {
+  const qtd = Number(document.getElementById("q_"+id).value);
+
+  await runTransaction(db, async (tx) => {
+    const ref = doc(db,"produtos",id);
+    const snap = await tx.get(ref);
+    if (!snap.exists()) throw "Produto inexistente";
+    if (snap.data().estoque < qtd) throw "Sem estoque";
+
+    tx.update(ref,{estoque: snap.data().estoque - qtd});
+  });
+
+  carrinho[id] = (carrinho[id] || 0) + qtd;
+  atualizarCarrinho();
+};
+
+function atualizarCarrinho(){
+  let total = Object.values(carrinho).reduce((a,b)=>a+b,0);
+  cartInfo.innerText = `🛒 Carrinho: ${total} itens`;
 }
 
-function renderProducts(cat){
-    const p=document.getElementById("products");
-    p.innerHTML="";
-    products.filter(i=>i.cat===cat).forEach(i=>{
-        let d=document.createElement("div");
-        d.className="card";
-        d.innerHTML=`
-            <img src="${i.img}">
-            <strong>${i.name}</strong><br>
-            R$ ${i.price}<br>
-            Estoque: ${i.stock}
-            <div class="qty">
-                <button onclick="addCart(${i.id})">+</button>
-            </div>`;
-        p.appendChild(d);
-    });
-}
+/* ================= ADMIN ================= */
+const adminTabela = document.getElementById("adminTabela");
 
-function addCart(id){
-    let p=products.find(i=>i.id===id);
-    if(p.stock<=0) return alert("Sem estoque");
-    p.stock--;
-    let c=cart.find(i=>i.id===id);
-    if(c) c.q++;
-    else cart.push({id:id,q:1});
-    save();
-}
+onSnapshot(collection(db,"produtos"), snap => {
+  adminTabela.innerHTML="";
+  snap.forEach(d=>{
+    const p=d.data();
+    adminTabela.innerHTML+=`
+      <tr>
+        <td>${p.nome}</td>
+        <td><input type="number" id="preco_${d.id}" value="${p.preco}"></td>
+        <td><input type="number" id="estoque_${d.id}" value="${p.estoque}"></td>
+        <td><button onclick="salvar('${d.id}')">Salvar</button></td>
+      </tr>
+    `;
+  });
+});
 
-function renderCart(){
-    const c=document.getElementById("cartItems");
-    let total=0;
-    c.innerHTML="";
-    cart.forEach(i=>{
-        let p=products.find(x=>x.id===i.id);
-        total+=p.price*i.q;
-        c.innerHTML+=`${p.name} (${i.q})<br>`;
-    });
-    document.getElementById("total").innerText=total.toFixed(2);
-}
-
-function save(){
-    localStorage.setItem("products",JSON.stringify(products));
-    localStorage.setItem("cart",JSON.stringify(cart));
-    renderCart();
-}
-
-function adminLogin(){
-    let s=prompt("Senha admin:");
-    if(s==="godoy2026"){
-        document.getElementById("adminPanel").style.display="block";
-        renderAdmin();
-    }
-}
-
-function renderAdmin(){
-    const a=document.getElementById("adminItems");
-    a.innerHTML="";
-    products.forEach(p=>{
-        a.innerHTML+=`
-        <input value="${p.name}">
-        <input type="number" value="${p.price}">
-        <input type="number" value="${p.stock}">
-        `;
-    });
-}
-
-function saveAdmin(){
-    alert("Alterações salvas!");
-}
-
-renderTabs();
-renderProducts(categories[0]);
-renderCart();
+window.salvar = async (id)=>{
+  await updateDoc(doc(db,"produtos",id),{
+    preco:Number(document.getElementById("preco_"+id).value),
+    estoque:Number(document.getElementById("estoque_"+id).value)
+  });
+};
 </script>
 
 </body>
