@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Odòmiyá Artigos Religiosos</title>
+<title>Odòmáìyà Artigos Religiosos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,19 +11,14 @@ body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8}
 /* HEADER */
 header{
 background:linear-gradient(135deg,#0a2540,#133b5c);
-color:#fff;
-padding:20px;
-text-align:center;
+color:#fff;padding:20px;text-align:center;
 }
 header a{color:#9ad7ff;text-decoration:none}
 
 /* CONTROLES */
 .controls{
-display:flex;
-gap:10px;
-padding:15px;
-flex-wrap:wrap;
-justify-content:center;
+display:flex;gap:10px;padding:15px;
+justify-content:center;flex-wrap:wrap;
 }
 .controls input,.controls select{
 padding:8px;border-radius:6px;border:1px solid #ccc;
@@ -31,17 +26,14 @@ padding:8px;border-radius:6px;border:1px solid #ccc;
 
 /* TABS */
 #tabs{
-display:flex;gap:10px;overflow-x:auto;
-background:#fff;padding:10px;
+display:flex;gap:10px;padding:10px;
+overflow-x:auto;background:#fff;
 }
 #tabs button{
-border:none;padding:8px 14px;
-border-radius:20px;cursor:pointer;
-background:#e0e0e0;
+border:none;padding:8px 14px;border-radius:20px;
+background:#e0e0e0;cursor:pointer;
 }
-#tabs button.active{
-background:#0a2540;color:#fff;
-}
+#tabs button.active{background:#0a2540;color:#fff}
 
 /* PRODUTOS */
 #products{
@@ -58,7 +50,7 @@ padding:15px;
 width:100%;height:160px;
 object-fit:cover;border-radius:10px;
 }
-.card h3{font-size:15px;margin:8px 0}
+.card h3{margin:8px 0;font-size:15px}
 .price{font-weight:bold}
 .promo{color:red;font-size:13px}
 .low{color:red;font-size:12px}
@@ -78,7 +70,7 @@ cursor:pointer;
 position:fixed;bottom:20px;right:20px;
 background:#25d366;color:#fff;
 padding:14px;border-radius:50%;
-text-decoration:none;font-size:22px;
+font-size:22px;text-decoration:none;
 }
 
 /* MODAL */
@@ -91,12 +83,11 @@ display:none;justify-content:center;align-items:center;
 background:#fff;width:90%;max-width:420px;
 border-radius:12px;padding:20px;
 }
-.item-cart{display:flex;justify-content:space-between}
 
-/* ADMIN */
-#adminBtn{
-text-align:center;padding:15px;
-font-size:13px;color:#555;cursor:pointer;
+/* RODAPÉ */
+footer{
+text-align:center;font-size:12px;
+color:#666;padding:20px;
 }
 </style>
 </head>
@@ -104,11 +95,16 @@ font-size:13px;color:#555;cursor:pointer;
 <body>
 
 <header>
-<h1>Odòmiyá Artigos Religiosos</h1>
-<p>📍 <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sete+de+Agosto,+28,+Passo+Fundo+RS" target="_blank">
-Rua Sete de Agosto, 28 – Passo Fundo / RS</a></p>
-<p>🕒 Seg–Sex: 10h–12h • 13:30–19h<br>
-Sábado: 10h–12h • 13:30–17h</p>
+<h1>Odòmáìyà Artigos Religiosos</h1>
+<p>
+📍 <a target="_blank"
+href="https://www.google.com/maps/search/?api=1&query=Rua+Sete+de+Agosto,+28,+Passo+Fundo+RS">
+Rua Sete de Agosto, 28 – Passo Fundo / RS</a>
+</p>
+<p>
+🕒 Seg–Sex: 10h–12h • 13:30–19h<br>
+Sábado: 10h–12h • 13:30–17h
+</p>
 </header>
 
 <div class="controls">
@@ -126,6 +122,7 @@ Sábado: 10h–12h • 13:30–17h</p>
 <div id="cartBtn" onclick="openCart()">🛒 Carrinho (<span id="cartCount">0</span>)</div>
 <a id="whats" href="#" onclick="sendWhats()">💬</a>
 
+<!-- CARRINHO -->
 <div id="cartModal" class="modal" onclick="closeModal(event)">
 <div class="box">
 <h3>Seu carrinho</h3>
@@ -135,8 +132,7 @@ Sábado: 10h–12h • 13:30–17h</p>
 </div>
 </div>
 
-<div id="adminBtn" onclick="openAdmin()">⚙️ Painel Admin</div>
-
+<!-- ADMIN -->
 <div id="adminModal" class="modal">
 <div class="box">
 <h3>Admin</h3>
@@ -146,108 +142,140 @@ Sábado: 10h–12h • 13:30–17h</p>
 </div>
 </div>
 
-<script>
-const ADMIN_PASSWORD="odomiya123";
+<footer id="footer">
+© Odòmáìyà • Axé, fé e tradição
+</footer>
 
+<script>
+/* ===== ADMIN ===== */
+const ADMIN_HASH="Z29kb3kyMDI2"; // base64 godoy2026
+let clicks=0;
+
+footer.onclick=()=>{
+ clicks++;
+ if(clicks===5) adminModal.style.display="flex";
+};
+
+if(location.search.includes("admin")){
+ adminModal.style.display="flex";
+}
+
+function login(){
+ if(btoa(adminPass.value)!==ADMIN_HASH){
+  alert("Senha incorreta");return;
+ }
+ localStorage.setItem("admin","1");
+ renderAdmin();
+}
+
+function renderAdmin(){
+ adminPanel.innerHTML="<h4>Produtos</h4>";
+ products.forEach((p,i)=>{
+  adminPanel.innerHTML+=`
+  <p>${p.name}<br>
+  Preço <input value="${p.price}" onchange="products[${i}].price=this.value">
+  Promo <input value="${p.promo}" onchange="products[${i}].promo=this.value">
+  Estoque <input value="${p.stock}" onchange="products[${i}].stock=this.value">
+  </p>`;
+ });
+ save();
+}
+
+/* ===== PRODUTOS ===== */
 let products=JSON.parse(localStorage.getItem("products"))||[
 {name:"Vela 7 dias branca",price:15,promo:0,stock:20,cat:"Velas",img:"https://via.placeholder.com/300x200?text=Vela"},
 {name:"Ferramenta Exu Tridente",price:120,promo:90,stock:3,cat:"Ferramentas Exu",img:"https://via.placeholder.com/300x200?text=Exu"},
-{name:"Roupa Nação Branca",price:220,promo:0,stock:5,cat:"Roupa Nação",img:"https://via.placeholder.com/300x200?text=Roupa"},
-{name:"Charuto Ritual",price:55,promo:0,stock:8,cat:"Charutos",img:"https://via.placeholder.com/300x200?text=Charuto"}
+{name:"Ferramenta Quimbanda Caveira",price:180,promo:0,stock:2,cat:"Ferramentas Quimbanda",img:"https://via.placeholder.com/300x200?text=Quimbanda"},
+{name:"Charuto Ritual",price:55,promo:0,stock:8,cat:"Charutos",img:"https://via.placeholder.com/300x200?text=Charuto"},
+{name:"Roupa Nação Branca",price:220,promo:0,stock:5,cat:"Roupa Nação",img:"https://via.placeholder.com/300x200?text=Roupa"}
 ];
 
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
-let cat="Todos";
+let currentCat="Todos";
 
-const tabs=[...new Set(["Todos",...products.map(p=>p.cat)])];
-tabs.forEach(t=>{
-let b=document.createElement("button");
-b.textContent=t;
-b.onclick=()=>{cat=t;render()};
-tabsDiv.appendChild(b);
-});
+/* DOM */
+const tabsDiv=document.getElementById("tabs");
+const productsDiv=document.getElementById("products");
+const cartItems=document.getElementById("cartItems");
 
+/* TABS */
+function renderTabs(){
+ tabsDiv.innerHTML="";
+ ["Todos",...new Set(products.map(p=>p.cat))].forEach(c=>{
+  let b=document.createElement("button");
+  b.textContent=c;
+  if(c===currentCat)b.classList.add("active");
+  b.onclick=()=>{currentCat=c;render()};
+  tabsDiv.appendChild(b);
+ });
+}
+
+/* RENDER */
 function render(){
-productsDiv.innerHTML="";
-let list=products.filter(p=>
-(cat==="Todos"||p.cat===cat)&&
-p.name.toLowerCase().includes(search.value.toLowerCase())
-);
-if(sort.value==="asc")list.sort((a,b)=>(a.promo||a.price)-(b.promo||b.price));
-if(sort.value==="desc")list.sort((a,b)=>(b.promo||b.price)-(a.promo||a.price));
+ productsDiv.innerHTML="";
+ let list=products.filter(p=>
+  (currentCat==="Todos"||p.cat===currentCat) &&
+  p.name.toLowerCase().includes(search.value.toLowerCase())
+ );
 
-list.forEach(p=>{
-productsDiv.innerHTML+=`
-<div class="card">
-<img src="${p.img}">
-<h3>${p.name}</h3>
-${p.promo?`<div class="promo">Promo: R$ ${p.promo}</div>`:""}
-<div class="price">R$ ${p.promo||p.price}</div>
-${p.stock<=3?'<div class="low">Últimas unidades</div>':''}
-<div class="qty">
-<button onclick="add('${p.name}',-1)">−</button>
-<button onclick="add('${p.name}',1)">+</button>
-</div>
-</div>`;
-});
-updateCart();
+ if(sort.value==="asc")list.sort((a,b)=>(a.promo||a.price)-(b.promo||b.price));
+ if(sort.value==="desc")list.sort((a,b)=>(b.promo||b.price)-(a.promo||a.price));
+
+ list.forEach(p=>{
+  productsDiv.innerHTML+=`
+  <div class="card">
+   <img src="${p.img}">
+   <h3>${p.name}</h3>
+   ${p.promo?`<div class="promo">Promo R$ ${p.promo}</div>`:""}
+   <div class="price">R$ ${p.promo||p.price}</div>
+   ${p.stock<=3?'<div class="low">Últimas unidades</div>':''}
+   <div class="qty">
+    <button onclick="add('${p.name}',-1)">−</button>
+    <button onclick="add('${p.name}',1)">+</button>
+   </div>
+  </div>`;
+ });
+ updateCart();
 }
 
+/* CARRINHO */
 function add(n,q){
-let i=cart.find(i=>i.name===n);
-let p=products.find(p=>p.name===n);
-if(!i&&q>0)cart.push({...p,qty:1});
-else if(i){i.qty+=q;if(i.qty<=0)cart=cart.filter(x=>x.name!==n);}
-save();
-}
-
-function save(){
-localStorage.setItem("cart",JSON.stringify(cart));
-localStorage.setItem("products",JSON.stringify(products));
-updateCart();
+ let i=cart.find(i=>i.name===n);
+ let p=products.find(p=>p.name===n);
+ if(!i&&q>0)cart.push({...p,qty:1});
+ else if(i){i.qty+=q;if(i.qty<=0)cart=cart.filter(x=>x.name!==n);}
+ save();
 }
 
 function updateCart(){
-cartCount.textContent=cart.reduce((s,i)=>s+i.qty,0);
-cartItems.innerHTML="";
-let t=0;
-cart.forEach(i=>{
-let pr=i.promo||i.price;
-t+=pr*i.qty;
-cartItems.innerHTML+=`
-<div class="item-cart">${i.name} x${i.qty}
-<button onclick="removeItem('${i.name}')">X</button>
-</div>`;
-});
-total.textContent=t.toFixed(2);
+ cartCount.textContent=cart.reduce((s,i)=>s+i.qty,0);
+ cartItems.innerHTML="";
+ let t=0;
+ cart.forEach(i=>{
+  let pr=i.promo||i.price;
+  t+=pr*i.qty;
+  cartItems.innerHTML+=`${i.name} x${i.qty}<br>`;
+ });
+ total.textContent=t.toFixed(2);
 }
 
-function removeItem(n){cart=cart.filter(i=>i.name!==n);save();}
+function save(){
+ localStorage.setItem("cart",JSON.stringify(cart));
+ localStorage.setItem("products",JSON.stringify(products));
+ updateCart();
+}
 
 function openCart(){cartModal.style.display="flex";}
 function closeModal(e){if(e.target.classList.contains("modal"))e.target.style.display="none";}
 
 function sendWhats(){
-let msg="Pedido Odòmiyá%0A";
-cart.forEach(i=>msg+=`${i.name} x${i.qty}%0A`);
-msg+=`Total R$ ${total.textContent}`;
-window.open("https://wa.me/55SEUNUMERO?text="+msg);
+ let msg="Pedido Odòmáìyà%0A";
+ cart.forEach(i=>msg+=`${i.name} x${i.qty}%0A`);
+ msg+=`Total R$ ${total.textContent}`;
+ window.open("https://wa.me/55SEUNUMERO?text="+msg);
 }
 
-/* ADMIN */
-function openAdmin(){adminModal.style.display="flex";}
-function login(){
-if(adminPass.value!==ADMIN_PASSWORD)return alert("Senha incorreta");
-adminPanel.innerHTML="";
-products.forEach((p,i)=>{
-adminPanel.innerHTML+=`
-<p>${p.name}<br>
-Preço <input value="${p.price}" onchange="products[${i}].price=this.value">
-Promo <input value="${p.promo}" onchange="products[${i}].promo=this.value">
-Estoque <input value="${p.stock}" onchange="products[${i}].stock=this.value">
-</p>`;
-});
-}
+renderTabs();
 render();
 </script>
 
