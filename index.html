@@ -19,18 +19,16 @@ header {
     text-align: center;
 }
 
-header h1 {
-    margin: 0;
-}
+header h1 { margin: 0; }
 
 header p {
-    margin: 5px 0;
+    margin: 6px 0;
     font-size: 14px;
 }
 
 .info {
     font-size: 13px;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .info a {
@@ -66,6 +64,7 @@ header p {
     border-radius: 20px;
     background: #e0e0e0;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .tabs button.active {
@@ -75,7 +74,7 @@ header p {
 
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 15px;
     padding: 20px;
 }
@@ -87,17 +86,16 @@ header p {
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .card h3 {
-    margin: 0;
+    margin: 0 0 8px;
     font-size: 16px;
 }
 
 .price {
     font-weight: bold;
-    margin: 8px 0;
+    margin: 6px 0;
 }
 
 .old-price {
@@ -106,18 +104,38 @@ header p {
     color: #888;
 }
 
-.card button {
-    margin-top: 8px;
-    padding: 8px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background: #0a2540;
-    color: #fff;
+.qty-area {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
 }
 
-.remove {
-    background: #c62828;
+.qty-area button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    background: #ddd;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.qty-area input {
+    width: 40px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.add-cart {
+    flex: 1;
+    background: #0a2540;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
 }
 
 #cart {
@@ -126,9 +144,8 @@ header p {
     left: 20px;
     background: #0a2540;
     color: #fff;
-    padding: 10px 15px;
+    padding: 10px 16px;
     border-radius: 30px;
-    cursor: pointer;
 }
 
 #whatsapp {
@@ -152,8 +169,8 @@ header p {
     <p>Tradição, fundamento e respeito. Produtos escolhidos com axé.</p>
 
     <div class="info">
-        📍 <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cel+Mostardeiro,+Boqueirão,+Passo+Fundo+RS" target="_blank">
-        Rua Cel. Mostardeiro, Boqueirão – Passo Fundo / RS
+        📍 <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sete+de+Agosto,+28,+Passo+Fundo+RS" target="_blank">
+        Rua Sete de Agosto, 28 – Passo Fundo / RS
         </a><br><br>
 
         🕒 <strong>Horário de Atendimento</strong><br>
@@ -172,84 +189,72 @@ header p {
 </div>
 
 <div class="tabs" id="tabs"></div>
-
 <div class="products" id="products"></div>
 
-<div id="cart">🛒 Carrinho (<span id="count">0</span>)</div>
+<div id="cart">🛒 Carrinho: <span id="count">0</span></div>
 
 <a id="whatsapp" href="https://wa.me/5599999999999" target="_blank">💬</a>
 
 <script>
 const products = [
-    {name:"Vela 7 dias branca", price:15, cat:"Velas"},
-    {name:"Vela azul Oxalá", price:18, cat:"Velas"},
-    {name:"Vela palito ritual", price:5, cat:"Velas"},
-
-    {name:"Charuto São Jorge", price:45, cat:"Charutos"},
-    {name:"Charuto Cubano Ritual", price:65, cat:"Charutos"},
-
-    {name:"Ferramenta Exu Tridente", price:120, cat:"Ferramentas Exu"},
-    {name:"Ferramenta Pomba Gira", price:110, cat:"Ferramentas Exu"},
-
-    {name:"Ferramenta Ogum Espada", price:150, cat:"Ferramentas Nação"},
-    {name:"Ferramenta Oxóssi Arco", price:135, cat:"Ferramentas Nação"},
-
-    {name:"Ferramenta Quimbanda Caveira", price:180, cat:"Ferramentas Quimbanda"},
-    {name:"Ferramenta Quimbanda Punhal", price:160, cat:"Ferramentas Quimbanda"},
-
-    {name:"Roupa Nação branca", price:220, cat:"Roupa Nação"},
-    {name:"Roupa Quimbanda preta", price:240, cat:"Roupa Quimbanda"}
+ {name:"Vela 7 dias branca", price:15, cat:"Velas"},
+ {name:"Vela azul Oxalá", price:18, cat:"Velas"},
+ {name:"Charuto Ritual", price:55, cat:"Charutos"},
+ {name:"Ferramenta Exu Tridente", price:120, cat:"Ferramentas Exu"},
+ {name:"Ferramenta Quimbanda Caveira", price:180, cat:"Ferramentas Quimbanda"},
+ {name:"Ferramenta Ogum Espada", price:150, cat:"Ferramentas Nação"},
+ {name:"Roupa Nação branca", price:220, cat:"Roupa Nação"},
+ {name:"Roupa Quimbanda preta", price:240, cat:"Roupa Quimbanda"}
 ];
 
 const today = new Date();
 const promoStart = new Date("2026-02-01");
 const promoEnd = new Date("2026-02-10");
 
-let cart = 0;
+let cartTotal = 0;
 let currentCat = "Todos";
 
 const tabs = ["Todos", ...new Set(products.map(p=>p.cat))];
-
 tabs.forEach(cat=>{
     const b = document.createElement("button");
     b.textContent = cat;
     b.onclick = ()=>{currentCat=cat; render()};
     if(cat==="Todos") b.classList.add("active");
-    document.getElementById("tabs").appendChild(b);
+    tabsEl.appendChild(b);
 });
 
 function render(){
-    const list = document.getElementById("products");
-    list.innerHTML = "";
+    productsEl.innerHTML = "";
 
-    let filtered = products.filter(p =>
+    let list = products.filter(p =>
         (currentCat==="Todos" || p.cat===currentCat) &&
         p.name.toLowerCase().includes(search.value.toLowerCase())
     );
 
-    if(sort.value==="asc") filtered.sort((a,b)=>a.price-b.price);
-    if(sort.value==="desc") filtered.sort((a,b)=>b.price-a.price);
+    if(sort.value==="asc") list.sort((a,b)=>a.price-b.price);
+    if(sort.value==="desc") list.sort((a,b)=>b.price-a.price);
 
-    filtered.forEach(p=>{
+    list.forEach(p=>{
         const card = document.createElement("div");
-        card.className="card";
+        card.className = "card";
 
         let price = p.price;
-        let promo = false;
-
-        if(today>=promoStart && today<=promoEnd){
-            price = (p.price * 0.9).toFixed(2);
-            promo = true;
-        }
+        let promo = today>=promoStart && today<=promoEnd;
+        if(promo) price = (price * 0.9).toFixed(2);
 
         card.innerHTML = `
             <h3>${p.name}</h3>
             ${promo ? `<div class="old-price">R$ ${p.price.toFixed(2)}</div>` : ""}
             <div class="price">R$ ${price}</div>
-            <button onclick="add()">Adicionar</button>
-            <button class="remove" onclick="remove()">Remover</button>
+
+            <div class="qty-area">
+                <button onclick="changeQty(this,-1)">−</button>
+                <input type="text" value="1" readonly>
+                <button onclick="changeQty(this,1)">+</button>
+                <button class="add-cart" onclick="addToCart(this)">Adicionar</button>
+            </div>
         `;
-        list.appendChild(card);
+        productsEl.appendChild(card);
     });
 
     document.querySelectorAll(".tabs button").forEach(b=>{
@@ -257,19 +262,24 @@ function render(){
     });
 }
 
-function add(){
-    cart++;
-    count.textContent = cart;
+function changeQty(btn, val){
+    const input = btn.parentElement.querySelector("input");
+    let q = parseInt(input.value) + val;
+    if(q < 1) q = 1;
+    input.value = q;
 }
 
-function remove(){
-    if(cart>0) cart--;
-    count.textContent = cart;
+function addToCart(btn){
+    const qty = parseInt(btn.parentElement.querySelector("input").value);
+    cartTotal += qty;
+    count.textContent = cartTotal;
 }
 
 search.oninput = render;
 sort.onchange = render;
 
+const tabsEl = document.getElementById("tabs");
+const productsEl = document.getElementById("products");
 render();
 </script>
 
