@@ -6,176 +6,97 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8}
 
 /* HEADER */
-header {
-    background: linear-gradient(135deg, #0a2540, #133b5c);
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+header{
+background:linear-gradient(135deg,#0a2540,#133b5c);
+color:#fff;
+padding:20px;
+text-align:center;
 }
-
-header h1 { margin: 0; }
-header p { font-size: 14px; margin: 6px 0; }
-
-header a {
-    color: #a8e0ff;
-    text-decoration: none;
-}
+header a{color:#9ad7ff;text-decoration:none}
 
 /* CONTROLES */
-.controls {
-    display: flex;
-    gap: 10px;
-    padding: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
+.controls{
+display:flex;
+gap:10px;
+padding:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+.controls input,.controls select{
+padding:8px;border-radius:6px;border:1px solid #ccc;
 }
 
-.controls input, .controls select {
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+/* TABS */
+#tabs{
+display:flex;gap:10px;overflow-x:auto;
+background:#fff;padding:10px;
 }
-
-/* ABAS */
-.tabs {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    overflow-x: auto;
-    background: #fff;
+#tabs button{
+border:none;padding:8px 14px;
+border-radius:20px;cursor:pointer;
+background:#e0e0e0;
 }
-
-.tabs button {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 20px;
-    background: #e0e0e0;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.tabs button.active {
-    background: #0a2540;
-    color: #fff;
+#tabs button.active{
+background:#0a2540;color:#fff;
 }
 
 /* PRODUTOS */
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 15px;
-    padding: 20px;
+#products{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+gap:15px;padding:20px;
+}
+.card{
+background:#fff;border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,.08);
+padding:15px;
+}
+.card img{
+width:100%;height:160px;
+object-fit:cover;border-radius:10px;
+}
+.card h3{font-size:15px;margin:8px 0}
+.price{font-weight:bold}
+.promo{color:red;font-size:13px}
+.low{color:red;font-size:12px}
+
+/* QTD */
+.qty{display:flex;gap:6px;margin-top:10px}
+.qty button{width:30px;height:30px}
+
+/* FIXOS */
+#cartBtn{
+position:fixed;bottom:20px;left:20px;
+background:#0a2540;color:#fff;
+padding:12px 18px;border-radius:30px;
+cursor:pointer;
+}
+#whats{
+position:fixed;bottom:20px;right:20px;
+background:#25d366;color:#fff;
+padding:14px;border-radius:50%;
+text-decoration:none;font-size:22px;
 }
 
-.card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+/* MODAL */
+.modal{
+position:fixed;inset:0;
+background:rgba(0,0,0,.6);
+display:none;justify-content:center;align-items:center;
 }
-
-.card h3 {
-    margin: 0 0 6px;
-    font-size: 16px;
+.box{
+background:#fff;width:90%;max-width:420px;
+border-radius:12px;padding:20px;
 }
+.item-cart{display:flex;justify-content:space-between}
 
-.price {
-    font-weight: bold;
-}
-
-.old-price {
-    text-decoration: line-through;
-    font-size: 13px;
-    color: #777;
-}
-
-.low-stock {
-    font-size: 12px;
-    color: red;
-}
-
-/* QUANTIDADE */
-.qty {
-    display: flex;
-    gap: 6px;
-    margin-top: 10px;
-}
-
-.qty button {
-    width: 28px;
-    height: 28px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.qty input {
-    width: 40px;
-    text-align: center;
-}
-
-/* BOTÕES FIXOS */
-#cartBtn {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: #0a2540;
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: 30px;
-    cursor: pointer;
-}
-
-#whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25d366;
-    color: #fff;
-    padding: 14px;
-    border-radius: 50%;
-    font-size: 22px;
-    text-decoration: none;
-}
-
-/* MODAL CARRINHO */
-#cartModal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-#cartBox {
-    background: #fff;
-    width: 90%;
-    max-width: 420px;
-    border-radius: 12px;
-    padding: 20px;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 14px;
-}
-
-.cart-item button {
-    border: none;
-    background: red;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
+/* ADMIN */
+#adminBtn{
+text-align:center;padding:15px;
+font-size:13px;color:#555;cursor:pointer;
 }
 </style>
 </head>
@@ -184,20 +105,14 @@ header a {
 
 <header>
 <h1>Odòmiyá Artigos Religiosos</h1>
-<p>Tradição, fundamento e respeito. Produtos escolhidos com axé.</p>
-
-<p>
-📍 <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sete+de+Agosto,+28,+Passo+Fundo+RS" target="_blank">
-Rua Sete de Agosto, 28 – Passo Fundo / RS
-</a><br><br>
-
-🕒 Segunda a Sexta: 10h–12h • 13:30–19h<br>
-Sábado: 10h–12h • 13:30–17h
-</p>
+<p>📍 <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sete+de+Agosto,+28,+Passo+Fundo+RS" target="_blank">
+Rua Sete de Agosto, 28 – Passo Fundo / RS</a></p>
+<p>🕒 Seg–Sex: 10h–12h • 13:30–19h<br>
+Sábado: 10h–12h • 13:30–17h</p>
 </header>
 
 <div class="controls">
-<input id="search" placeholder="Pesquisar item">
+<input id="search" placeholder="Pesquisar produto">
 <select id="sort">
 <option value="">Ordenar</option>
 <option value="asc">Menor preço</option>
@@ -205,120 +120,134 @@ Sábado: 10h–12h • 13:30–17h
 </select>
 </div>
 
-<div class="tabs" id="tabs"></div>
-<div class="products" id="products"></div>
+<div id="tabs"></div>
+<div id="products"></div>
 
 <div id="cartBtn" onclick="openCart()">🛒 Carrinho (<span id="cartCount">0</span>)</div>
-<a id="whatsapp" href="#" onclick="sendWhats()">💬</a>
+<a id="whats" href="#" onclick="sendWhats()">💬</a>
 
-<!-- MODAL -->
-<div id="cartModal" onclick="closeCart(event)">
-<div id="cartBox">
-<h3>Seu Carrinho</h3>
+<div id="cartModal" class="modal" onclick="closeModal(event)">
+<div class="box">
+<h3>Seu carrinho</h3>
 <div id="cartItems"></div>
-<p><strong>Total: R$ <span id="total">0.00</span></strong></p>
-<button onclick="sendWhats()">Enviar pelo WhatsApp</button>
+<p><b>Total: R$ <span id="total">0.00</span></b></p>
+<button onclick="sendWhats()">Enviar WhatsApp</button>
+</div>
+</div>
+
+<div id="adminBtn" onclick="openAdmin()">⚙️ Painel Admin</div>
+
+<div id="adminModal" class="modal">
+<div class="box">
+<h3>Admin</h3>
+<input type="password" id="adminPass" placeholder="Senha">
+<button onclick="login()">Entrar</button>
+<div id="adminPanel"></div>
 </div>
 </div>
 
 <script>
-const products = [
- {name:"Vela 7 dias branca",price:15,cat:"Velas",stock:20},
- {name:"Charuto Ritual",price:55,cat:"Charutos",stock:8},
- {name:"Ferramenta Exu Tridente",price:120,cat:"Ferramentas Exu",stock:3},
- {name:"Ferramenta Quimbanda Caveira",price:180,cat:"Ferramentas Quimbanda",stock:2},
- {name:"Roupa Nação branca",price:220,cat:"Roupa Nação",stock:5},
- {name:"Roupa Quimbanda preta",price:240,cat:"Roupa Quimbanda",stock:4}
+const ADMIN_PASSWORD="odomiya123";
+
+let products=JSON.parse(localStorage.getItem("products"))||[
+{name:"Vela 7 dias branca",price:15,promo:0,stock:20,cat:"Velas",img:"https://via.placeholder.com/300x200?text=Vela"},
+{name:"Ferramenta Exu Tridente",price:120,promo:90,stock:3,cat:"Ferramentas Exu",img:"https://via.placeholder.com/300x200?text=Exu"},
+{name:"Roupa Nação Branca",price:220,promo:0,stock:5,cat:"Roupa Nação",img:"https://via.placeholder.com/300x200?text=Roupa"},
+{name:"Charuto Ritual",price:55,promo:0,stock:8,cat:"Charutos",img:"https://via.placeholder.com/300x200?text=Charuto"}
 ];
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let currentCat="Todos";
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+let cat="Todos";
 
-const tabs = ["Todos",...new Set(products.map(p=>p.cat))];
-tabs.forEach(c=>{
- let b=document.createElement("button");
- b.textContent=c;
- b.onclick=()=>{currentCat=c;render()};
- if(c==="Todos")b.classList.add("active");
- tabsEl.appendChild(b);
+const tabs=[...new Set(["Todos",...products.map(p=>p.cat)])];
+tabs.forEach(t=>{
+let b=document.createElement("button");
+b.textContent=t;
+b.onclick=()=>{cat=t;render()};
+tabsDiv.appendChild(b);
 });
 
 function render(){
- productsEl.innerHTML="";
- let list=products.filter(p=>
-  (currentCat==="Todos"||p.cat===currentCat)&&
-  p.name.toLowerCase().includes(search.value.toLowerCase())
- );
- if(sort.value==="asc")list.sort((a,b)=>a.price-b.price);
- if(sort.value==="desc")list.sort((a,b)=>b.price-a.price);
+productsDiv.innerHTML="";
+let list=products.filter(p=>
+(cat==="Todos"||p.cat===cat)&&
+p.name.toLowerCase().includes(search.value.toLowerCase())
+);
+if(sort.value==="asc")list.sort((a,b)=>(a.promo||a.price)-(b.promo||b.price));
+if(sort.value==="desc")list.sort((a,b)=>(b.promo||b.price)-(a.promo||a.price));
 
- list.forEach(p=>{
-  let div=document.createElement("div");
-  div.className="card";
-  div.innerHTML=`
-  <h3>${p.name}</h3>
-  <div class="price">R$ ${p.price.toFixed(2)}</div>
-  ${p.stock<=3?'<div class="low-stock">Últimas unidades</div>':''}
-  <div class="qty">
-   <button onclick="add('${p.name}',-1)">−</button>
-   <button onclick="add('${p.name}',1)">+</button>
-  </div>`;
-  productsEl.appendChild(div);
- });
- updateCart();
+list.forEach(p=>{
+productsDiv.innerHTML+=`
+<div class="card">
+<img src="${p.img}">
+<h3>${p.name}</h3>
+${p.promo?`<div class="promo">Promo: R$ ${p.promo}</div>`:""}
+<div class="price">R$ ${p.promo||p.price}</div>
+${p.stock<=3?'<div class="low">Últimas unidades</div>':''}
+<div class="qty">
+<button onclick="add('${p.name}',-1)">−</button>
+<button onclick="add('${p.name}',1)">+</button>
+</div>
+</div>`;
+});
+updateCart();
 }
 
-function add(name,q){
- let item=cart.find(i=>i.name===name);
- if(!item&&q>0){
-  let p=products.find(p=>p.name===name);
-  cart.push({...p,qty:1});
- }else if(item){
-  item.qty+=q;
-  if(item.qty<=0)cart=cart.filter(i=>i.name!==name);
- }
- localStorage.setItem("cart",JSON.stringify(cart));
- updateCart();
+function add(n,q){
+let i=cart.find(i=>i.name===n);
+let p=products.find(p=>p.name===n);
+if(!i&&q>0)cart.push({...p,qty:1});
+else if(i){i.qty+=q;if(i.qty<=0)cart=cart.filter(x=>x.name!==n);}
+save();
+}
+
+function save(){
+localStorage.setItem("cart",JSON.stringify(cart));
+localStorage.setItem("products",JSON.stringify(products));
+updateCart();
 }
 
 function updateCart(){
- cartCount.textContent=cart.reduce((s,i)=>s+i.qty,0);
- cartItems.innerHTML="";
- let total=0;
- cart.forEach(i=>{
-  total+=i.price*i.qty;
-  cartItems.innerHTML+=`
-  <div class="cart-item">
-   ${i.name} x${i.qty}
-   <button onclick="removeItem('${i.name}')">X</button>
-  </div>`;
- });
- totalEl.textContent=total.toFixed(2);
+cartCount.textContent=cart.reduce((s,i)=>s+i.qty,0);
+cartItems.innerHTML="";
+let t=0;
+cart.forEach(i=>{
+let pr=i.promo||i.price;
+t+=pr*i.qty;
+cartItems.innerHTML+=`
+<div class="item-cart">${i.name} x${i.qty}
+<button onclick="removeItem('${i.name}')">X</button>
+</div>`;
+});
+total.textContent=t.toFixed(2);
 }
 
-function removeItem(name){
- cart=cart.filter(i=>i.name!==name);
- localStorage.setItem("cart",JSON.stringify(cart));
- updateCart();
-}
+function removeItem(n){cart=cart.filter(i=>i.name!==n);save();}
 
 function openCart(){cartModal.style.display="flex";}
-function closeCart(e){if(e.target.id==="cartModal")cartModal.style.display="none";}
+function closeModal(e){if(e.target.classList.contains("modal"))e.target.style.display="none";}
 
 function sendWhats(){
- let msg="Pedido - Odòmiyá Artigos Religiosos%0A%0A";
- cart.forEach(i=>{
-  msg+=`${i.name} x${i.qty} - R$ ${(i.price*i.qty).toFixed(2)}%0A`;
- });
- msg+=`%0ATotal: R$ ${totalEl.textContent}`;
- window.open("https://wa.me/55SEUNUMEROAQUI?text="+msg);
+let msg="Pedido Odòmiyá%0A";
+cart.forEach(i=>msg+=`${i.name} x${i.qty}%0A`);
+msg+=`Total R$ ${total.textContent}`;
+window.open("https://wa.me/55SEUNUMERO?text="+msg);
 }
 
-const tabsEl=document.getElementById("tabs");
-const productsEl=document.getElementById("products");
-const cartItems=document.getElementById("cartItems");
-const cartCount=document.getElementById("cartCount");
-const totalEl=document.getElementById("total");
+/* ADMIN */
+function openAdmin(){adminModal.style.display="flex";}
+function login(){
+if(adminPass.value!==ADMIN_PASSWORD)return alert("Senha incorreta");
+adminPanel.innerHTML="";
+products.forEach((p,i)=>{
+adminPanel.innerHTML+=`
+<p>${p.name}<br>
+Preço <input value="${p.price}" onchange="products[${i}].price=this.value">
+Promo <input value="${p.promo}" onchange="products[${i}].promo=this.value">
+Estoque <input value="${p.stock}" onchange="products[${i}].stock=this.value">
+</p>`;
+});
+}
 render();
 </script>
 
