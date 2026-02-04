@@ -188,6 +188,7 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
   justify-content:space-around;
   padding:10px 0;
   box-shadow:0 -5px 20px var(--shadow);
+  cursor:pointer;
 }
 .nav button{
   background:none;
@@ -220,7 +221,6 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
 .admin-close:hover{color:#333;}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -256,7 +256,7 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
 </div>
 
 <div class="nav" id="navFooter">
-<button onclick="toggleCart()">🛒 Carrinho</button>
+<button>🛒 Carrinho</button>
 <p style="font-size:12px;margin-top:3px;">Odòmáìyà</p>
 </div>
 
@@ -338,6 +338,9 @@ function atualizarCarrinho(){
   const cartItems=document.getElementById("cartItems");
   cartItems.innerHTML="";
   let total=0;
+  if(Object.keys(carrinho).length===0){
+    cartItems.innerHTML="<p style='text-align:center;color:#888'>Carrinho vazio</p>";
+  }
   Object.entries(carrinho).forEach(([id,q])=>{
     const p=produtos.find(x=>x.id===id);
     total+=p.preco*q;
@@ -367,7 +370,7 @@ function ordenar(tipo){
   renderProdutos(lista);
 }
 
-// ADMIN ESCONDIDO
+// ADMIN ESCONDIDO COM TELEFONE E SENHA
 const adminPanel = document.getElementById("adminPanel");
 const adminTabela = document.getElementById("adminTabela");
 let clickCount = 0;
@@ -376,8 +379,15 @@ const navFooter = document.getElementById("navFooter");
 navFooter.addEventListener("click", ()=>{
   clickCount++;
   if(clickCount>=5){
-    toggleAdmin();
     clickCount=0;
+    const telefone = prompt("Digite seu número de telefone:");
+    const senha = prompt("Digite a senha:");
+    if(telefone==="5542999861309" && senha==="godoy2026"){
+      alert("Acesso concedido!");
+      toggleAdmin();
+    } else {
+      alert("Acesso negado!");
+    }
   }
 });
 
