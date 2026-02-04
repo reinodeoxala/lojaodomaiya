@@ -10,12 +10,11 @@
 <style>
 :root{
 --azul:#0b2c4a;
---verde:#25d366;
---fundo:#f4f6fa;
 --promo:#c62828;
+--fundo:#f4f6fa;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
 font-family:Montserrat,sans-serif;
@@ -24,19 +23,19 @@ padding-bottom:120px;
 }
 
 /* CABEÇALHO */
-.topo{
+header{
 background:linear-gradient(135deg,#071d33,#0b2c4a);
-color:white;
-padding:22px 16px;
+color:#fff;
+padding:22px 15px;
 text-align:center;
 border-radius:0 0 22px 22px;
 }
 
-.topo h1{font-size:20px;margin-bottom:6px}
-.topo p{font-size:13px;opacity:.9}
+header h1{font-size:20px;margin-bottom:6px}
+header p{font-size:13px;opacity:.9}
 
 /* PRODUTOS */
-.produtos{
+#produtos{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
 gap:15px;
@@ -44,7 +43,7 @@ padding:15px;
 }
 
 .produto{
-background:white;
+background:#fff;
 border-radius:18px;
 padding:12px;
 box-shadow:0 6px 18px rgba(0,0,0,.15);
@@ -68,17 +67,22 @@ color:#777;
 }
 
 .preco{
+font-size:15px;
 font-weight:600;
 color:var(--azul);
 }
 
-.promo{
-color:var(--promo);
-font-size:13px;
-font-weight:600;
+.badge{
+background:var(--promo);
+color:white;
+display:inline-block;
+padding:3px 8px;
+font-size:11px;
+border-radius:12px;
+margin-bottom:6px;
 }
 
-.qtd input{
+input{
 width:60px;
 padding:6px;
 border-radius:8px;
@@ -89,7 +93,7 @@ margin:6px 0;
 button{
 width:100%;
 background:var(--azul);
-color:white;
+color:#fff;
 border:none;
 padding:10px;
 border-radius:25px;
@@ -97,62 +101,73 @@ cursor:pointer;
 }
 </style>
 </head>
+
 <body>
 
-<header class="topo">
+<header>
 <h1>Odòmáiyá Artigos Religiosos</h1>
 <p>📍 Rua Cel. Mostardeiro, Boqueirão — Passo Fundo / RS</p>
 </header>
 
-<div class="produtos" id="produtos"></div>
+<div id="produtos"></div>
 
 <script>
-const URL_PLANILHA = "COLE_AQUI_O_LINK_DA_PLANILHA_PUBLICADA";
+const PLANILHA_URL = "COLE_AQUI_O_LINK_DA_PLANILHA_CSV";
 
-let produtos = [];
+const hoje = new Date();
+const produtosDiv = document.getElementById("produtos");
 
-fetch(URL_PLANILHA)
+fetch(PLANILHA_URL)
 .then(r => r.text())
 .then(csv => {
   const linhas = csv.split("\n").slice(1);
-  linhas.forEach(l => {
-    if(l.trim()){
-      const [nome,cat,preco,precoPromo,estoque,imagem] = l.split(",");
-      produtos.push({
-        nome,
-        cat,
-        preco:Number(preco),
-        promo:Number(precoPromo),
-        estoque:Number(estoque),
-        imagem
-      });
-    }
-  });
-  render();
-});
 
-function render(){
-const div = document.getElementById("produtos");
-div.innerHTML="";
-produtos.forEach((p,i)=>{
-if(p.estoque > 0){
-const precoFinal = p.promo > 0 ? p.promo : p.preco;
-div.innerHTML += `
-<div class="produto">
-<img src="${p.imagem}" loading="lazy">
-<h3>${p.nome}</h3>
-${p.promo>0 ? `<div class="preco-antigo">R$ ${p.preco.toFixed(2)}</div>
-<div class="promo">Promoção</div>` : ``}
-<div class="preco">R$ ${precoFinal.toFixed(2)}</div>
-<div class="qtd">
-<input type="number" min="1" max="${p.estoque}" value="1" id="q${i}">
-</div>
-<button onclick="alert('Adicionar ao carrinho aqui')">Adicionar</button>
-</div>`;
-}
+  linhas.forEach(linha => {
+    if(!linha.trim()) return;
+
+    const [
+      nome,
+      categoria,
+      preco,
+      precoPromo,
+      dataInicio,
+      dataFim,
+      estoque,
+      imagem
+    ] = linha.split(",");
+
+    if(Number(estoque) <= 0) return;
+
+    let promoAtiva = false;
+
+    if(precoPromo > 0 && dataInicio && dataFim){
+      const inicio = new Date(dataInicio);
+      const fim = new Date(dataFim);
+      promoAtiva = hoje >= inicio && hoje <= fim;
+    }
+
+    const precoFinal = promoAtiva ? precoPromo : preco;
+
+    produtosDiv.innerHTML += `
+      <div class="produto">
+        <img src="${imagem}" loading="lazy">
+        <h3>${nome}</h3>
+
+        ${promoAtiva ? `
+          <span class="badge">Promoção</span>
+          <div class="preco-antigo">R$ ${Number(preco).toFixed(2)}</div>
+        ` : ``}
+
+        <div class="preco">R$ ${Number(precoFinal).toFixed(2)}</div>
+
+        <input type="number" min="1" max="${estoque}" value="1">
+        <button>Adicionar</button>
+      </div>
+    `;
+  });
 });
-}
 </script>
 
 </body>
 </html>
+
