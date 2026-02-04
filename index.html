@@ -10,7 +10,7 @@
 <style>
 :root{
 --azul:#0b2c4a;
---promo:#c62828;
+--verde:#25d366;
 --fundo:#f4f6fa;
 }
 
@@ -19,19 +19,19 @@
 body{
 font-family:Montserrat,sans-serif;
 background:var(--fundo);
-padding-bottom:120px;
+padding-bottom:140px;
 }
 
-/* CABEÇALHO */
+/* HEADER */
 header{
 background:linear-gradient(135deg,#071d33,#0b2c4a);
 color:#fff;
-padding:22px 15px;
+padding:25px 15px;
 text-align:center;
 border-radius:0 0 22px 22px;
 }
 
-header h1{font-size:20px;margin-bottom:6px}
+header h1{font-size:22px;margin-bottom:6px}
 header p{font-size:13px;opacity:.9}
 
 /* PRODUTOS */
@@ -47,6 +47,8 @@ background:#fff;
 border-radius:18px;
 padding:12px;
 box-shadow:0 6px 18px rgba(0,0,0,.15);
+display:flex;
+flex-direction:column;
 }
 
 .produto img{
@@ -60,25 +62,16 @@ font-size:14px;
 margin-bottom:6px;
 }
 
-.preco-antigo{
-text-decoration:line-through;
-font-size:13px;
-color:#777;
-}
-
 .preco{
 font-size:15px;
 font-weight:600;
 color:var(--azul);
+margin-bottom:8px;
 }
 
-.badge{
-background:var(--promo);
-color:white;
-display:inline-block;
-padding:3px 8px;
-font-size:11px;
-border-radius:12px;
+.controles{
+display:flex;
+gap:6px;
 margin-bottom:6px;
 }
 
@@ -87,17 +80,68 @@ width:60px;
 padding:6px;
 border-radius:8px;
 border:1px solid #ccc;
-margin:6px 0;
 }
 
 button{
-width:100%;
+flex:1;
 background:var(--azul);
 color:#fff;
 border:none;
 padding:10px;
 border-radius:25px;
 cursor:pointer;
+}
+
+/* CARRINHO */
+#toggleCarrinho{
+position:fixed;
+bottom:20px;
+left:20px;
+background:var(--azul);
+color:#fff;
+padding:14px 18px;
+border-radius:30px;
+cursor:pointer;
+z-index:10;
+}
+
+#carrinho{
+position:fixed;
+bottom:90px;
+left:20px;
+right:20px;
+background:#fff;
+border-radius:20px;
+padding:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+display:none;
+max-height:50vh;
+overflow:auto;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+margin-bottom:6px;
+font-size:14px;
+}
+
+.item span{
+cursor:pointer;
+color:red;
+}
+
+/* WHATSAPP */
+.whats{
+position:fixed;
+bottom:20px;
+right:20px;
+background:var(--verde);
+color:#fff;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
 }
 </style>
 </head>
@@ -107,67 +151,95 @@ cursor:pointer;
 <header>
 <h1>Odòmáiyá Artigos Religiosos</h1>
 <p>📍 Rua Cel. Mostardeiro, Boqueirão — Passo Fundo / RS</p>
+<p>Tradição, fundamento e respeito. Produtos escolhidos com axé.</p>
 </header>
 
 <div id="produtos"></div>
 
+<div id="toggleCarrinho" onclick="abrirCarrinho()">🛒 Carrinho</div>
+
+<div id="carrinho">
+<h3>Carrinho</h3>
+<div id="lista"></div>
+<p><strong>Total: R$ <span id="total">0.00</span></strong></p>
+<button onclick="finalizar()">Finalizar no WhatsApp</button>
+</div>
+
+<a class="whats" href="https://wa.me/5554996048808" target="_blank">🟢</a>
+
 <script>
-const PLANILHA_URL = "COLE_AQUI_O_LINK_DA_PLANILHA_CSV";
+const produtos = [
+{nome:"Vela 7 dias branca",preco:15,img:"https://via.placeholder.com/300"},
+{nome:"Vela azul Oxalá",preco:18,img:"https://via.placeholder.com/300"},
+{nome:"Incenso Arruda",preco:12,img:"https://via.placeholder.com/300"},
+{nome:"Incenso Sete Ervas",preco:14,img:"https://via.placeholder.com/300"},
+{nome:"Imagem Exu Tranca Ruas",preco:120,img:"https://via.placeholder.com/300"},
+{nome:"Imagem Oxum dourada",preco:135,img:"https://via.placeholder.com/300"},
+{nome:"Banho Abre Caminhos",preco:22,img:"https://via.placeholder.com/300"},
+{nome:"Banho Descarrego",preco:20,img:"https://via.placeholder.com/300"},
+{nome:"Guia Oxalá",preco:80,img:"https://via.placeholder.com/300"},
+{nome:"Guia Exu",preco:95,img:"https://via.placeholder.com/300"},
+{nome:"Patuá Proteção",preco:30,img:"https://via.placeholder.com/300"},
+{nome:"Defumador Espiritual",preco:25,img:"https://via.placeholder.com/300"},
+];
 
-const hoje = new Date();
-const produtosDiv = document.getElementById("produtos");
+let carrinho = [];
 
-fetch(PLANILHA_URL)
-.then(r => r.text())
-.then(csv => {
-  const linhas = csv.split("\n").slice(1);
+const div = document.getElementById("produtos");
 
-  linhas.forEach(linha => {
-    if(!linha.trim()) return;
-
-    const [
-      nome,
-      categoria,
-      preco,
-      precoPromo,
-      dataInicio,
-      dataFim,
-      estoque,
-      imagem
-    ] = linha.split(",");
-
-    if(Number(estoque) <= 0) return;
-
-    let promoAtiva = false;
-
-    if(precoPromo > 0 && dataInicio && dataFim){
-      const inicio = new Date(dataInicio);
-      const fim = new Date(dataFim);
-      promoAtiva = hoje >= inicio && hoje <= fim;
-    }
-
-    const precoFinal = promoAtiva ? precoPromo : preco;
-
-    produtosDiv.innerHTML += `
-      <div class="produto">
-        <img src="${imagem}" loading="lazy">
-        <h3>${nome}</h3>
-
-        ${promoAtiva ? `
-          <span class="badge">Promoção</span>
-          <div class="preco-antigo">R$ ${Number(preco).toFixed(2)}</div>
-        ` : ``}
-
-        <div class="preco">R$ ${Number(precoFinal).toFixed(2)}</div>
-
-        <input type="number" min="1" max="${estoque}" value="1">
-        <button>Adicionar</button>
-      </div>
-    `;
-  });
+produtos.forEach((p,i)=>{
+div.innerHTML+=`
+<div class="produto">
+<img src="${p.img}">
+<h3>${p.nome}</h3>
+<div class="preco">R$ ${p.preco.toFixed(2)}</div>
+<div class="controles">
+<input type="number" min="1" value="1" id="q${i}">
+<button onclick="add(${i})">Adicionar</button>
+</div>
+</div>`;
 });
+
+function add(i){
+const q = Number(document.getElementById("q"+i).value);
+carrinho.push({...produtos[i],q});
+renderCarrinho();
+}
+
+function renderCarrinho(){
+const lista=document.getElementById("lista");
+lista.innerHTML="";
+let total=0;
+carrinho.forEach((p,i)=>{
+total+=p.preco*p.q;
+lista.innerHTML+=`
+<div class="item">
+${p.q}x ${p.nome} – R$ ${(p.preco*p.q).toFixed(2)}
+<span onclick="remover(${i})">✖</span>
+</div>`;
+});
+document.getElementById("total").innerText=total.toFixed(2);
+}
+
+function remover(i){
+carrinho.splice(i,1);
+renderCarrinho();
+}
+
+function abrirCarrinho(){
+const c=document.getElementById("carrinho");
+c.style.display=c.style.display=="block"?"none":"block";
+}
+
+function finalizar(){
+let msg="Pedido:%0A";
+carrinho.forEach(p=>{
+msg+=`${p.q}x ${p.nome}%0A`;
+});
+msg+=`Total: R$ ${document.getElementById("total").innerText}`;
+window.open("https://wa.me/5554996048808?text="+msg);
+}
 </script>
 
 </body>
 </html>
-
