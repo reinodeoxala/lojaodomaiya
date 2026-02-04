@@ -6,13 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 :root{
 --azul:#0b2c4a;
 --verde:#25d366;
 --fundo:#f4f6fa;
+--promo:#c62828;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -23,42 +23,17 @@ background:var(--fundo);
 padding-bottom:120px;
 }
 
-/* HEADER APP */
-header{
+/* CABEÇALHO */
+.topo{
 background:linear-gradient(135deg,#071d33,#0b2c4a);
 color:white;
-padding:20px;
+padding:22px 16px;
 text-align:center;
-border-radius:0 0 25px 25px;
+border-radius:0 0 22px 22px;
 }
 
-header h1{
-font-size:22px;
-margin-bottom:6px;
-}
-
-header p{
-font-size:14px;
-opacity:.9;
-}
-
-/* CATEGORIAS */
-.categorias{
-display:flex;
-overflow-x:auto;
-gap:10px;
-padding:15px;
-}
-
-.categorias button{
-flex:none;
-padding:10px 18px;
-border-radius:30px;
-border:none;
-background:white;
-box-shadow:0 4px 10px rgba(0,0,0,.1);
-font-size:14px;
-}
+.topo h1{font-size:20px;margin-bottom:6px}
+.topo p{font-size:13px;opacity:.9}
 
 /* PRODUTOS */
 .produtos{
@@ -73,8 +48,6 @@ background:white;
 border-radius:18px;
 padding:12px;
 box-shadow:0 6px 18px rgba(0,0,0,.15);
-display:flex;
-flex-direction:column;
 }
 
 .produto img{
@@ -85,19 +58,24 @@ margin-bottom:8px;
 
 .produto h3{
 font-size:14px;
-margin-bottom:4px;
-}
-
-.preco{
-color:var(--azul);
-font-weight:600;
 margin-bottom:6px;
 }
 
-.qtd{
-display:flex;
-gap:6px;
-margin-bottom:8px;
+.preco-antigo{
+text-decoration:line-through;
+font-size:13px;
+color:#777;
+}
+
+.preco{
+font-weight:600;
+color:var(--azul);
+}
+
+.promo{
+color:var(--promo);
+font-size:13px;
+font-weight:600;
 }
 
 .qtd input{
@@ -105,174 +83,75 @@ width:60px;
 padding:6px;
 border-radius:8px;
 border:1px solid #ccc;
+margin:6px 0;
 }
 
-.produto button{
+button{
+width:100%;
 background:var(--azul);
 color:white;
 border:none;
-border-radius:25px;
 padding:10px;
-font-size:14px;
-}
-
-/* CARRINHO FIXO */
-.carrinho{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:white;
-border-radius:25px 25px 0 0;
-box-shadow:0 -8px 25px rgba(0,0,0,.3);
-padding:15px;
-}
-
-.carrinho h3{
-font-size:16px;
-margin-bottom:6px;
-}
-
-.carrinho ul{
-list-style:none;
-max-height:100px;
-overflow:auto;
-font-size:13px;
-margin-bottom:8px;
-}
-
-.total{
-font-weight:600;
-margin-bottom:10px;
-}
-
-.carrinho button{
-width:100%;
-background:var(--verde);
-border:none;
-color:white;
-padding:14px;
-font-size:15px;
-border-radius:30px;
-}
-
-/* WHATSAPP FLOAT */
-.whatsapp-float{
-position:fixed;
-top:20px;
-right:20px;
-background:var(--verde);
-width:50px;
-height:50px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-font-size:22px;
-box-shadow:0 6px 20px rgba(0,0,0,.3);
+border-radius:25px;
+cursor:pointer;
 }
 </style>
 </head>
 <body>
 
-<header>
-<h1>Odòmáiyá</h1>
-<p>Artigos religiosos com fundamento e axé</p>
+<header class="topo">
+<h1>Odòmáiyá Artigos Religiosos</h1>
+<p>📍 Rua Cel. Mostardeiro, Boqueirão — Passo Fundo / RS</p>
 </header>
-
-<div class="categorias">
-<button onclick="filtrar('todos')">Todos</button>
-<button onclick="filtrar('velas')">Velas</button>
-<button onclick="filtrar('incensos')">Incensos</button>
-<button onclick="filtrar('imagens')">Imagens</button>
-<button onclick="filtrar('banhos')">Banhos</button>
-<button onclick="filtrar('guias')">Guias</button>
-</div>
 
 <div class="produtos" id="produtos"></div>
 
-<div class="carrinho">
-<h3>🛒 Carrinho</h3>
-<ul id="lista"></ul>
-<div class="total" id="total"></div>
-<button onclick="finalizar()">Finalizar no WhatsApp</button>
-</div>
-
-<a class="whatsapp-float" href="https://wa.me/5554996048808" target="_blank">
-<i class="fab fa-whatsapp"></i>
-</a>
-
 <script>
-const produtos = [
-{nome:"Vela 7 dias branca",cat:"velas",preco:15},
-{nome:"Vela azul Oxalá",cat:"velas",preco:18},
-{nome:"Incenso Arruda",cat:"incensos",preco:12},
-{nome:"Imagem Exu Tranca Ruas",cat:"imagens",preco:120},
-{nome:"Banho abre caminhos",cat:"banhos",preco:25},
-{nome:"Guia Oxóssi",cat:"guias",preco:80},
-];
+const URL_PLANILHA = "COLE_AQUI_O_LINK_DA_PLANILHA_PUBLICADA";
 
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let produtos = [];
 
-function render(lista){
+fetch(URL_PLANILHA)
+.then(r => r.text())
+.then(csv => {
+  const linhas = csv.split("\n").slice(1);
+  linhas.forEach(l => {
+    if(l.trim()){
+      const [nome,cat,preco,precoPromo,estoque,imagem] = l.split(",");
+      produtos.push({
+        nome,
+        cat,
+        preco:Number(preco),
+        promo:Number(precoPromo),
+        estoque:Number(estoque),
+        imagem
+      });
+    }
+  });
+  render();
+});
+
+function render(){
 const div = document.getElementById("produtos");
 div.innerHTML="";
-lista.forEach((p,i)=>{
-div.innerHTML+=`
+produtos.forEach((p,i)=>{
+if(p.estoque > 0){
+const precoFinal = p.promo > 0 ? p.promo : p.preco;
+div.innerHTML += `
 <div class="produto">
-<img src="https://via.placeholder.com/300x200.png?text=Odòmáiyá">
+<img src="${p.imagem}" loading="lazy">
 <h3>${p.nome}</h3>
-<div class="preco">R$ ${p.preco.toFixed(2)}</div>
+${p.promo>0 ? `<div class="preco-antigo">R$ ${p.preco.toFixed(2)}</div>
+<div class="promo">Promoção</div>` : ``}
+<div class="preco">R$ ${precoFinal.toFixed(2)}</div>
 <div class="qtd">
-<input type="number" min="1" value="1" id="q${i}">
+<input type="number" min="1" max="${p.estoque}" value="1" id="q${i}">
 </div>
-<button onclick="add('${p.nome}',${p.preco},${i})">Adicionar</button>
+<button onclick="alert('Adicionar ao carrinho aqui')">Adicionar</button>
 </div>`;
+}
 });
 }
-
-function add(nome,preco,i){
-const qtd = Number(document.getElementById("q"+i).value);
-carrinho.push({nome,preco,qtd});
-salvar();
-}
-
-function salvar(){
-localStorage.setItem("carrinho",JSON.stringify(carrinho));
-atualizar();
-}
-
-function atualizar(){
-const ul = document.getElementById("lista");
-const totalDiv = document.getElementById("total");
-ul.innerHTML="";
-let total=0;
-carrinho.forEach(p=>{
-total += p.preco * p.qtd;
-ul.innerHTML+=`<li>${p.nome} (${p.qtd}x)</li>`;
-});
-totalDiv.innerText = "Total: R$ " + total.toFixed(2);
-}
-
-function finalizar(){
-let texto="Olá! Gostaria de fazer o pedido:%0A%0A";
-let total=0;
-carrinho.forEach(p=>{
-texto+=`- ${p.nome} (${p.qtd}x) R$ ${(p.preco*p.qtd).toFixed(2)}%0A`;
-total+=p.preco*p.qtd;
-});
-texto+=`%0ATotal: R$ ${total.toFixed(2)}`;
-window.open("https://wa.me/5554996048808?text="+texto);
-}
-
-function filtrar(cat){
-if(cat=="todos") render(produtos);
-else render(produtos.filter(p=>p.cat==cat));
-}
-
-render(produtos);
-atualizar();
 </script>
 
 </body>
