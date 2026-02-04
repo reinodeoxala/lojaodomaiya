@@ -19,6 +19,7 @@
   --shadow:rgba(0,0,0,.15);
 }
 
+/* Geral */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat,sans-serif;}
 body{background:var(--bg);padding-bottom:100px;color:#111;transition:0.3s;}
 
@@ -129,7 +130,7 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
 }
 .add:hover{background:var(--azul2);}
 
-/* CART PROFISSIONAL */
+/* CART MODERNO */
 #cart{
   position:fixed;
   bottom:-100%;
@@ -297,14 +298,200 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
 <h2>Painel Administrativo</h2>
 <input id="buscaAdmin" placeholder="Buscar produto" oninput="buscarAdmin()">
 <table>
-<thead><tr><th>Produto</th><th>Preço</th><th>Desconto (%)</th><th>Estoque</th><th>Salvar</th></tr></thead>
+<thead><tr><th>Produto</th><th>Preço</th><th>Desconto (R$)</th><th>Estoque</th><th>Salvar</th></tr></thead>
 <tbody id="adminTabela"></tbody>
 </table>
 </div>
 
 <script>
-// Aqui entraria todo o JS de produtos, carrinho moderno, admin com 10 cliques, desconto etc
-</script>
+// PRODUTOS EXEMPLO
+let produtos = [
+{id:"1",nome:"Guia de Iemanjá",preco:25,desconto:0,estoque:15,img:"https://via.placeholder.com/200x150?text=Iemanja",cat:"Guias"},
+{id:"2",nome:"Guia de Oxalá",preco:25,desconto:0,estoque:12,img:"https://via.placeholder.com/200x150?text=Oxala",cat:"Guias"},
+{id:"3",nome:"Guia de Ogum",preco:25,desconto:0,estoque:10,img:"https://via.placeholder.com/200x150?text=Ogum",cat:"Guias"},
+{id:"4",nome:"Guia de Oxum",preco:25,desconto:0,estoque:8,img:"https://via.placeholder.com/200x150?text=Oxum",cat:"Guias"},
+{id:"5",nome:"Vela Azul",preco:10,desconto:0,estoque:20,img:"https://via.placeholder.com/200x150?text=Vela+Azul",cat:"Velas"},
+{id:"6",nome:"Vela Vermelha",preco:10,desconto:0,estoque:20,img:"https://via.placeholder.com/200x150?text=Vela+Vermelha",cat:"Velas"},
+{id:"7",nome:"Vela Branca",preco:10,desconto:0,estoque:20,img:"https://via.placeholder.com/200x150?text=Vela+Branca",cat:"Velas"},
+{id:"8",nome:"Vela Amarela",preco:10,desconto:0,estoque:20,img:"https://via.placeholder.com/200x150?text=Vela+Amarela",cat:"Velas"}
+];
 
+let carrinho = {};
+const produtosDiv = document.getElementById("produtos");
+const tabsDiv = document.getElementById("tabs");
+const cart = document.getElementById("cart");
+
+// Criar tabs
+[...new Set(produtos.map(p=>p.cat))].forEach(c=>{
+  const btn=document.createElement("button");
+  btn.textContent=c;
+  btn.onclick=()=>filtrar(c);
+  tabsDiv.appendChild(btn);
+});
+
+// Render produtos
+function renderProdutos(lista){
+  produtosDiv.innerHTML="";
+  lista.forEach(p=>{
+    const precoFinal = (p.preco - p.desconto).toFixed(2);
+    const div=document.createElement("div");
+    div.className="produto";
+    div.innerHTML=`
+      <img src="${p.img}">
+      <h3>${p.nome}</h3>
+      <div class="preco">R$ ${precoFinal}${p.desconto>0?` <span style="color:#f00;font-size:12px;">(R$ ${p.desconto} off)</span>`:""}</div>
+      Estoque: ${p.estoque}
+      <div class="qtd">
+        <button onclick="mudarQtd('${p.id}',-1)">-</button>
+        <input type="number" min="1" value="1" id="q_${p.id}">
+        <button onclick="mudarQtd('${p.id}',1)">+</button>
+      </div>
+      <button class="add" onclick="addCarrinho('${p.id}')">Adicionar</button>`;
+    produtosDiv.appendChild(div);
+  });
+}
+renderProdutos(produtos);
+
+// Funções básicas de carrinho
+function mudarQtd(id,delta){
+  const inp=document.getElementById("q_"+id);
+  inp.value=Math.max(1, Number(inp.value)+delta);
+}
+
+function addCarrinho(id){
+  const qtd=Number(document.getElementById("q_"+id).value);
+  const p=produtos.find(x=>x.id===id);
+  if(p.estoque<qtd){alert("Sem estoque suficiente");return;}
+  p.estoque-=qtd;
+  carrinho[id]=(carrinho[id]||0)+qtd;
+  renderProdutos(produtos);
+  atualizarCarrinho();
+}
+
+function atualizarCarrinho(){
+  const cartItems=document.getElementById("cartItems");
+  cartItems.innerHTML="";
+  let total=0;
+  Object.entries(carrinho).forEach(([id,q])=>{
+    const p=produtos.find(x=>x.id===id);
+    const subtotal = (p.preco - p.desconto)*q;
+    total+=subtotal;
+    const div=document.createElement("div");
+    div.className="cart-item";
+    div.innerHTML=`
+      <img src="${p.img}">
+      <div class="cart-item-info">
+        <b>${p.nome}</b>
+        <small>R$ ${(p.preco - p.desconto).toFixed(2)} x ${q} = R$ ${subtotal.toFixed(2)}</small>
+      </div>
+      <div class="cart-item-controls">
+        <button onclick="alterarQtdCarrinho('${id}',-1)">-</button>
+        <button onclick="alterarQtdCarrinho('${id}',1)">+</button>
+        <button class="cart-item-remove" onclick="removerCarrinho('${id}')">✖</button>
+      </div>`;
+    cartItems.appendChild(div);
+  });
+  document.getElementById("total").innerText=total.toFixed(2);
+}
+
+function alterarQtdCarrinho(id,delta){
+  const p=produtos.find(x=>x.id===id);
+  const novaQtd=(carrinho[id]||0)+delta;
+  if(novaQtd<1)return;
+  if(delta>0 && p.estoque<delta){alert("Sem estoque suficiente");return;}
+  p.estoque-=Math.max(0,delta);
+  carrinho[id]=novaQtd;
+  if(carrinho[id]<=0) delete carrinho[id];
+  renderProdutos(produtos);
+  atualizarCarrinho();
+}
+
+function removerCarrinho(id){
+  const p=produtos.find(x=>x.id===id);
+  p.estoque += carrinho[id];
+  delete carrinho[id];
+  renderProdutos(produtos);
+  atualizarCarrinho();
+}
+
+function toggleCart(){cart.classList.toggle("show");}
+
+function filtrar(cat){renderProdutos(produtos.filter(p=>p.cat===cat));}
+function buscar(txt){renderProdutos(produtos.filter(p=>p.nome.toLowerCase().includes(txt.toLowerCase())));}
+function ordenar(tipo){
+  let lista=[...produtos];
+  if(tipo==="menor") lista.sort((a,b)=>(a.preco - a.desconto) - (b.preco - b.desconto));
+  if(tipo==="maior") lista.sort((a,b)=>(b.preco - b.desconto) - (a.preco - a.desconto));
+  renderProdutos(lista);
+}
+
+// CHECKOUT
+function checkout(){
+  if(Object.keys(carrinho).length===0){alert("Carrinho vazio");return;}
+  const tipo = prompt("Digite 1 para Retirada ou 2 para Entrega");
+  let endereco="";
+  if(tipo==="2"){endereco=prompt("Informe o endereço completo para entrega:");}
+  else{endereco="Rua Sete de Agosto, 28 – Passo Fundo/RS";}
+  let msg="Olá! Quero comprar:\n";
+  Object.entries(carrinho).forEach(([id,q])=>{
+    const p=produtos.find(x=>x.id===id);
+    msg+=`- ${p.nome} x${q} (R$ ${(p.preco - p.desconto).toFixed(2)})\n`;
+  });
+  msg+=`\nTipo: ${tipo==="2"?"Entrega":"Retirada"}\nEndereço: ${endereco}`;
+  window.open("https://wa.me/5545996048808?text="+encodeURIComponent(msg));
+}
+
+// ADMIN 10 cliques
+let clickCount=0;
+document.getElementById("navFooter").addEventListener("click",()=>{
+  clickCount++;
+  if(clickCount>=10){
+    toggleAdmin();
+    clickCount=0;
+  }
+});
+
+function toggleAdmin(){document.getElementById("adminPanel").classList.toggle("show");}
+
+const adminTabela=document.getElementById("adminTabela");
+function renderAdmin(){
+  adminTabela.innerHTML="";
+  produtos.forEach(p=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${p.nome}</td>
+      <td><input type="number" id="preco_${p.id}" value="${p.preco}"></td>
+      <td><input type="number" id="desconto_${p.id}" value="${p.desconto}"></td>
+      <td><input type="number" id="estoque_${p.id}" value="${p.estoque}"></td>
+      <td><button onclick="salvarAdmin('${p.id}')">Salvar</button></td>`;
+    adminTabela.appendChild(tr);
+  });
+}
+renderAdmin();
+
+function salvarAdmin(id){
+  const p=produtos.find(x=>x.id===id);
+  p.preco = Number(document.getElementById("preco_"+id).value);
+  p.desconto = Number(document.getElementById("desconto_"+id).value);
+  p.estoque = Number(document.getElementById("estoque_"+id).value);
+  renderProdutos(produtos);
+  atualizarCarrinho();
+}
+
+function buscarAdmin(){
+  const txt=document.getElementById("buscaAdmin").value.toLowerCase();
+  adminTabela.innerHTML="";
+  produtos.filter(p=>p.nome.toLowerCase().includes(txt)).forEach(p=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${p.nome}</td>
+      <td><input type="number" id="preco_${p.id}" value="${p.preco}"></td>
+      <td><input type="number" id="desconto_${p.id}" value="${p.desconto}"></td>
+      <td><input type="number" id="estoque_${p.id}" value="${p.estoque}"></td>
+      <td><button onclick="salvarAdmin('${p.id}')">Salvar</button></td>`;
+    adminTabela.appendChild(tr);
+  });
+}
+</script>
 </body>
 </html>
