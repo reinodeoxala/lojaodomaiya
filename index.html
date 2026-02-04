@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Odòmáìyà Artigos Religiosos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --azul:#0b2c4a;
@@ -17,189 +15,66 @@
   --card:#fff;
   --cart-bg:#fafafa;
   --shadow:rgba(0,0,0,.15);
+  --hover:#e6f0fb;
 }
-
-/* Geral */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat,sans-serif;}
 body{background:var(--bg);padding-bottom:100px;color:#111;transition:0.3s;}
-
-/* HEADER */
-header{
-  background:linear-gradient(135deg,#06192c,#0b2c4a);
-  color:#fff;
-  padding:25px 20px 35px;
-  border-bottom-left-radius:30px;
-  border-bottom-right-radius:30px;
-  text-align:center;
-}
+header{background:linear-gradient(135deg,#06192c,#0b2c4a);color:#fff;padding:25px 20px 35px;border-bottom-left-radius:30px;border-bottom-right-radius:30px;text-align:center;}
 header h1{font-size:22px;font-weight:700;letter-spacing:1px;}
 header p{font-size:13px;opacity:.9;margin-top:6px;}
 header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline-block;margin-top:6px;}
 
 /* SEARCH */
-.search{
-  margin:-20px 16px 15px;
-  background:#fff;
-  border-radius:14px;
-  padding:12px;
-  display:flex;
-  gap:8px;
-  box-shadow:0 8px 20px var(--shadow);
-}
-.search input, .search select{
-  flex:1;
-  border:none;
-  outline:none;
-  font-size:14px;
-  padding:6px;
-  border-radius:10px;
-}
+.search{margin:-20px 16px 15px;background:#fff;border-radius:14px;padding:12px;display:flex;gap:8px;box-shadow:0 8px 20px var(--shadow);}
+.search input, .search select{flex:1;border:none;outline:none;font-size:14px;padding:6px;border-radius:10px;}
 
 /* TABS */
-.tabs{
-  display:flex;
-  overflow-x:auto;
-  gap:10px;
-  padding:10px 16px;
-}
-.tabs button{
-  background:#fff;
-  border:none;
-  padding:8px 14px;
-  border-radius:20px;
-  font-size:13px;
-  white-space:nowrap;
-  box-shadow:0 4px 12px var(--shadow);
-  cursor:pointer;
-  transition:0.3s;
-}
-.tabs button.active{
-  background:var(--azul);
-  color:#fff;
-}
+.tabs{display:flex;overflow-x:auto;gap:10px;padding:10px 16px;}
+.tabs button{background:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:13px;white-space:nowrap;box-shadow:0 4px 12px var(--shadow);cursor:pointer;transition:0.3s;}
+.tabs button.active{background:var(--azul); color:#fff;}
 
 /* PRODUTOS */
-.produtos{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:14px;
-  padding:0 16px;
-}
-.produto{
-  background:var(--card);
-  border-radius:16px;
-  padding:10px;
-  box-shadow:0 6px 18px var(--shadow);
-  display:flex;
-  flex-direction:column;
-  transition:0.3s;
-}
-.produto:hover{transform:translateY(-3px);}
-.produto img{
-  width:100%;
-  border-radius:12px;
-  margin-bottom:8px;
-  height:150px;
-  object-fit:cover;
-}
+.produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;padding:0 16px;}
+.produto{background:var(--card);border-radius:16px;padding:10px;box-shadow:0 6px 18px var(--shadow);display:flex;flex-direction:column;transition:0.3s;}
+.produto:hover{transform:translateY(-3px); background:var(--hover);}
+.produto img{width:100%;border-radius:12px;margin-bottom:8px;height:150px;object-fit:cover;}
 .produto h3{font-size:14px;margin-bottom:4px;}
 .preco{font-weight:700;color:var(--azul2);font-size:14px;margin-bottom:4px;}
 .qtd{display:flex;align-items:center;justify-content:space-between;margin:6px 0;}
-.qtd button{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  border:none;
-  background:#ddd;
-  font-size:16px;
-  cursor:pointer;
-  transition:0.2s;
-}
+.qtd button{width:28px;height:28px;border-radius:50%;border:none;background:#ddd;font-size:16px;cursor:pointer;transition:0.2s;}
 .qtd button:hover{background:#ccc;}
 .qtd input{width:50px;text-align:center;border-radius:6px;border:1px solid #ccc;padding:4px;}
-.add{
-  margin-top:auto;
-  background:var(--azul);
-  color:#fff;
-  border:none;
-  padding:8px;
-  border-radius:20px;
-  font-size:13px;
-  cursor:pointer;
-  transition:0.3s;
-}
+.add{margin-top:auto;background:var(--azul);color:#fff;border:none;padding:8px;border-radius:20px;font-size:13px;cursor:pointer;transition:0.3s;}
 .add:hover{background:var(--azul2);}
 
-/* CART MODERNO */
+/* CART FLUTUANTE */
 #cart{
   position:fixed;
-  bottom:-100%;
-  left:0;
-  width:100%;
+  bottom:20px;
+  right:20px;
+  width:320px;
+  max-height:80vh;
   background:var(--cart-bg);
-  border-top-left-radius:22px;
-  border-top-right-radius:22px;
-  box-shadow:0 -10px 30px var(--shadow);
+  border-radius:22px;
+  box-shadow:0 10px 30px var(--shadow);
   padding:16px;
-  transition:.3s;
-  max-height:85vh;
-  overflow:auto;
+  transition:transform 0.3s, opacity 0.3s;
+  transform:translateY(120%);
+  opacity:0;
   z-index:1000;
 }
-#cart.show{bottom:0}
-.cart-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-  font-size:16px;
-  font-weight:600;
-}
-.cart-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin:8px 0;
-  background:#fff;
-  border-radius:12px;
-  padding:8px;
-  box-shadow:0 2px 6px var(--shadow);
-}
-.cart-item img{
-  width:50px;
-  height:50px;
-  object-fit:cover;
-  border-radius:8px;
-  margin-right:8px;
-}
-.cart-item-info{
-  flex:1;
-}
+#cart.show{transform:translateY(0);opacity:1;}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:16px;font-weight:600;}
+.cart-item{display:flex;align-items:center;justify-content:space-between;margin:8px 0;background:#fff;border-radius:12px;padding:8px;box-shadow:0 2px 6px var(--shadow);}
+.cart-item img{width:50px;height:50px;object-fit:cover;border-radius:8px;margin-right:8px;}
+.cart-item-info{flex:1;}
 .cart-item-info b{display:block;font-size:14px;}
 .cart-item-info small{font-size:12px;color:#666;}
-.cart-item-controls{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.cart-item-controls button{
-  width:28px;height:28px;border-radius:50%;border:none;background:#ddd;cursor:pointer;font-weight:700;
-}
+.cart-item-controls{display:flex;align-items:center;gap:6px;}
+.cart-item-controls button{width:28px;height:28px;border-radius:50%;border:none;background:#ddd;cursor:pointer;font-weight:700;}
 .cart-item-controls button:hover{background:#ccc;}
-.cart-item-remove{
-  margin-left:6px;
-  background:#ff4d4d;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:12px;
-  padding:2px 6px;
-}
-.cart-footer{
-  margin-top:12px;
-  text-align:right;
-}
+.cart-item-remove{margin-left:6px;background:#ff4d4d;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;padding:2px 6px;}
+.cart-footer{margin-top:12px;text-align:right;}
 .cart-footer button{
   width:100%;
   padding:12px;
@@ -209,6 +84,10 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
   font-size:16px;
   border-radius:25px;
   cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
 }
 .cart-footer button:hover{background:#1ebe5b;}
 
@@ -218,7 +97,7 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
   bottom:0;
   left:0;
   width:100%;
-  background:#0b2c4a;
+  background:var(--azul);
   color:#fff;
   display:flex;
   justify-content:center;
@@ -231,20 +110,7 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
 .nav span{font-weight:600;}
 
 /* ADMIN PANEL DISCRETO */
-.admin-panel{
-  display:none;
-  padding:20px;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 6px 18px var(--shadow);
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:90%;
-  max-width:500px;
-  z-index:2000;
-}
+.admin-panel{display:none;padding:20px;background:#fff;border-radius:12px;box-shadow:0 6px 18px var(--shadow);position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:500px;z-index:2000;}
 .admin-panel.show{display:block;}
 .admin-panel h2{margin-bottom:10px;}
 .admin-panel table{width:100%;border-collapse:collapse;}
@@ -283,14 +149,13 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
 </div>
 <div id="cartItems"></div>
 <div class="cart-footer">
-<b>Total: R$ <span id="total">0</span></b>
-<button onclick="checkout()">Finalizar no WhatsApp</button>
+<button onclick="checkout()">
+<img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" style="width:20px;"> Finalizar Compra
+</button>
 </div>
 </div>
 
-<div class="nav" id="navFooter">
-<span>@odomaia_artigosreligiosos</span>
-</div>
+<div class="nav" id="navFooter"><span>@odomaia_artigosreligiosos</span></div>
 
 <!-- ADMIN -->
 <div class="admin-panel" id="adminPanel">
@@ -304,36 +169,41 @@ header a{color:var(--dourado);text-decoration:none;font-size:13px;display:inline
 </div>
 
 <script>
-// PRODUTOS EXEMPLO
+// ===== Produtos exemplo com desconto persistente =====
 let produtos = [
-{id:"1",nome:"Guia de Iemanjá",preco:25,desconto:0,estoque:15,img:"https://via.placeholder.com/200x150?text=Iemanja",cat:"Guias"},
-{id:"2",nome:"Guia de Oxalá",preco:25,desconto:0,estoque:12,img:"https://via.placeholder.com/200x150?text=Oxala",cat:"Guias"},
-{id:"3",nome:"Guia de Ogum",preco:25,desconto:0,estoque:10,img:"https://via.placeholder.com/200x150?text=Ogum",cat:"Guias"},
-{id:"4",nome:"Guia de Oxum",preco:25,desconto:0,estoque:8,img:"https://via.placeholder.com/200x150?text=Oxum",cat:"Guias"},
-{id:"5",nome:"Vela Azul",preco:10,desconto:0,estoque:20,img:"https://via.placeholder.com/200x150?text=Vela+Azul",cat:"Velas"},
-{id:"6",nome:"Vela Vermelha",preco:10,desconto:0,estoque:20,img:"https://via.placeholder.com/200x150?text=Vela+Vermelha",cat:"Velas"},
-{id:"7",nome:"Vela Branca",preco:10,desconto:0,estoque:20,img:"https://via.placeholder.com/200x150?text=Vela+Branca",cat:"Velas"},
-{id:"8",nome:"Vela Amarela",preco:10,desconto:0,estoque:20,img:"https://via.placeholder.com/200x150?text=Vela+Amarela",cat:"Velas"}
+{id:"1",nome:"Guia de Iemanjá",preco:25,desconto:0,estoque:15,img:"https://i.imgur.com/qh0oVgT.jpg",cat:"Guias"},
+{id:"2",nome:"Guia de Oxalá",preco:25,desconto:0,estoque:12,img:"https://i.imgur.com/9V8G6ZY.jpg",cat:"Guias"},
+{id:"3",nome:"Guia de Ogum",preco:25,desconto:0,estoque:10,img:"https://i.imgur.com/3cYrXcD.jpg",cat:"Guias"},
+{id:"4",nome:"Guia de Oxum",preco:25,desconto:0,estoque:8,img:"https://i.imgur.com/VxPENmj.jpg",cat:"Guias"},
+{id:"5",nome:"Vela Azul",preco:10,desconto:0,estoque:20,img:"https://i.imgur.com/fkqQ1Uq.jpg",cat:"Velas"},
+{id:"6",nome:"Vela Vermelha",preco:10,desconto:0,estoque:20,img:"https://i.imgur.com/qHR2Jaf.jpg",cat:"Velas"},
+{id:"7",nome:"Vela Branca",preco:10,desconto:0,estoque:20,img:"https://i.imgur.com/IjNw1hA.jpg",cat:"Velas"},
+{id:"8",nome:"Vela Amarela",preco:10,desconto:0,estoque:20,img:"https://i.imgur.com/0GZ7bDw.jpg",cat:"Velas"}
 ];
 
-let carrinho = {};
-const produtosDiv = document.getElementById("produtos");
-const tabsDiv = document.getElementById("tabs");
-const cart = document.getElementById("cart");
+// Carregar descontos do localStorage
+let descontosSalvos = JSON.parse(localStorage.getItem("descontos")||"{}");
+produtos.forEach(p=>{
+  if(descontosSalvos[p.id]!=null) p.desconto=descontosSalvos[p.id];
+});
 
-// Criar tabs
-[...new Set(produtos.map(p=>p.cat))].forEach(c=>{
-  const btn=document.createElement("button");
-  btn.textContent=c;
-  btn.onclick=()=>filtrar(c);
+let carrinho={};
+
+// ===== Render Produtos e Tabs =====
+const produtosDiv=document.getElementById("produtos");
+const tabsDiv=document.getElementById("tabs");
+let categorias=[...new Set(produtos.map(p=>p.cat))];
+categorias.forEach(cat=>{
+  let btn=document.createElement("button");
+  btn.textContent=cat;
+  btn.onclick=()=>filtrar(cat);
   tabsDiv.appendChild(btn);
 });
 
-// Render produtos
 function renderProdutos(lista){
   produtosDiv.innerHTML="";
   lista.forEach(p=>{
-    const precoFinal = (p.preco - p.desconto).toFixed(2);
+    const precoFinal=(p.preco-p.desconto).toFixed(2);
     const div=document.createElement("div");
     div.className="produto";
     div.innerHTML=`
@@ -352,20 +222,30 @@ function renderProdutos(lista){
 }
 renderProdutos(produtos);
 
-// Funções básicas de carrinho
+function filtrar(cat){renderProdutos(produtos.filter(p=>p.cat===cat));}
+function buscar(txt){renderProdutos(produtos.filter(p=>p.nome.toLowerCase().includes(txt.toLowerCase())));}
+function ordenar(tipo){
+  let lista=[...produtos];
+  if(tipo==="menor") lista.sort((a,b)=>a.preco-b.preco);
+  if(tipo==="maior") lista.sort((a,b)=>b.preco-a.preco);
+  renderProdutos(lista);
+}
+
+// ===== Carrinho =====
 function mudarQtd(id,delta){
   const inp=document.getElementById("q_"+id);
-  inp.value=Math.max(1, Number(inp.value)+delta);
+  inp.value=Math.max(1,Number(inp.value)+delta);
 }
 
 function addCarrinho(id){
   const qtd=Number(document.getElementById("q_"+id).value);
   const p=produtos.find(x=>x.id===id);
-  if(p.estoque<qtd){alert("Sem estoque suficiente");return;}
-  p.estoque-=qtd;
+  if(!p || p.estoque<qtd){alert("Sem estoque suficiente"); return;}
   carrinho[id]=(carrinho[id]||0)+qtd;
+  p.estoque-=qtd;
   renderProdutos(produtos);
   atualizarCarrinho();
+  toggleCart(true);
 }
 
 function atualizarCarrinho(){
@@ -374,84 +254,76 @@ function atualizarCarrinho(){
   let total=0;
   Object.entries(carrinho).forEach(([id,q])=>{
     const p=produtos.find(x=>x.id===id);
-    const subtotal = (p.preco - p.desconto)*q;
+    const subtotal=(p.preco-p.desconto)*q;
     total+=subtotal;
     const div=document.createElement("div");
     div.className="cart-item";
     div.innerHTML=`
-      <img src="${p.img}">
-      <div class="cart-item-info">
-        <b>${p.nome}</b>
-        <small>R$ ${(p.preco - p.desconto).toFixed(2)} x ${q} = R$ ${subtotal.toFixed(2)}</small>
-      </div>
+      <img src="${p.img}"><div class="cart-item-info"><b>${p.nome}</b><small>R$ ${subtotal.toFixed(2)}</small></div>
       <div class="cart-item-controls">
-        <button onclick="alterarQtdCarrinho('${id}',-1)">-</button>
-        <button onclick="alterarQtdCarrinho('${id}',1)">+</button>
+        <button onclick="mudarQtdCarrinho('${id}',-1)">-</button>
+        <span>${q}</span>
+        <button onclick="mudarQtdCarrinho('${id}',1)">+</button>
         <button class="cart-item-remove" onclick="removerCarrinho('${id}')">✖</button>
       </div>`;
     cartItems.appendChild(div);
   });
+  document.querySelector("#cart .cart-footer b")?.remove();
   document.getElementById("total").innerText=total.toFixed(2);
 }
 
-function alterarQtdCarrinho(id,delta){
+function mudarQtdCarrinho(id,delta){
   const p=produtos.find(x=>x.id===id);
-  const novaQtd=(carrinho[id]||0)+delta;
-  if(novaQtd<1)return;
-  if(delta>0 && p.estoque<delta){alert("Sem estoque suficiente");return;}
-  p.estoque-=Math.max(0,delta);
+  if(!p) return;
+  const qtdAtual=carrinho[id];
+  const novaQtd=qtdAtual+delta;
+  if(novaQtd<1) return;
+  if(p.estoque<delta){alert("Sem estoque suficiente"); return;}
   carrinho[id]=novaQtd;
-  if(carrinho[id]<=0) delete carrinho[id];
+  p.estoque-=delta;
   renderProdutos(produtos);
   atualizarCarrinho();
 }
 
 function removerCarrinho(id){
-  const p=produtos.find(x=>x.id===id);
-  p.estoque += carrinho[id];
+  const qtd=carrinho[id];
+  produtos.find(p=>p.id===id).estoque+=qtd;
   delete carrinho[id];
   renderProdutos(produtos);
   atualizarCarrinho();
 }
 
-function toggleCart(){cart.classList.toggle("show");}
-
-function filtrar(cat){renderProdutos(produtos.filter(p=>p.cat===cat));}
-function buscar(txt){renderProdutos(produtos.filter(p=>p.nome.toLowerCase().includes(txt.toLowerCase())));}
-function ordenar(tipo){
-  let lista=[...produtos];
-  if(tipo==="menor") lista.sort((a,b)=>(a.preco - a.desconto) - (b.preco - b.desconto));
-  if(tipo==="maior") lista.sort((a,b)=>(b.preco - b.desconto) - (a.preco - a.desconto));
-  renderProdutos(lista);
+function toggleCart(force=false){
+  const c=document.getElementById("cart");
+  if(force) c.classList.add("show"); else c.classList.toggle("show");
 }
 
-// CHECKOUT
+// ===== Checkout =====
 function checkout(){
-  if(Object.keys(carrinho).length===0){alert("Carrinho vazio");return;}
-  const tipo = prompt("Digite 1 para Retirada ou 2 para Entrega");
-  let endereco="";
-  if(tipo==="2"){endereco=prompt("Informe o endereço completo para entrega:");}
-  else{endereco="Rua Sete de Agosto, 28 – Passo Fundo/RS";}
+  if(Object.keys(carrinho).length===0){alert("Carrinho vazio"); return;}
+  const opc=prompt("Deseja Retirar os produtos (R) ou Entrega (E)?").toUpperCase();
   let msg="Olá! Quero comprar:\n";
   Object.entries(carrinho).forEach(([id,q])=>{
     const p=produtos.find(x=>x.id===id);
-    msg+=`- ${p.nome} x${q} (R$ ${(p.preco - p.desconto).toFixed(2)})\n`;
+    msg+=`- ${p.nome} x${q}\n`;
   });
-  msg+=`\nTipo: ${tipo==="2"?"Entrega":"Retirada"}\nEndereço: ${endereco}`;
+  if(opc==="E"){
+    const end=prompt("Digite o endereço completo para entrega:");
+    msg+="Endereço: "+end;
+  } else{
+    msg+="Retirada no endereço: Rua Sete de Agosto, 28 – Passo Fundo/RS";
+  }
   window.open("https://wa.me/5545996048808?text="+encodeURIComponent(msg));
 }
 
-// ADMIN 10 cliques
-let clickCount=0;
-document.getElementById("navFooter").addEventListener("click",()=>{
-  clickCount++;
-  if(clickCount>=10){
-    toggleAdmin();
-    clickCount=0;
-  }
-});
-
-function toggleAdmin(){document.getElementById("adminPanel").classList.toggle("show");}
+// ===== Admin =====
+let adminPanel=document.getElementById("adminPanel");
+let clicks=0;
+document.getElementById("navFooter").onclick=function(){
+  clicks++;
+  if(clicks>=10){toggleAdmin(); clicks=0;}
+};
+function toggleAdmin(){adminPanel.classList.toggle("show");}
 
 const adminTabela=document.getElementById("adminTabela");
 function renderAdmin(){
@@ -471,17 +343,23 @@ renderAdmin();
 
 function salvarAdmin(id){
   const p=produtos.find(x=>x.id===id);
-  p.preco = Number(document.getElementById("preco_"+id).value);
-  p.desconto = Number(document.getElementById("desconto_"+id).value);
-  p.estoque = Number(document.getElementById("estoque_"+id).value);
+  p.preco=Number(document.getElementById("preco_"+id).value);
+  p.desconto=Number(document.getElementById("desconto_"+id).value);
+  p.estoque=Number(document.getElementById("estoque_"+id).value);
+  // salvar desconto localStorage
+  let descontosSalvos = JSON.parse(localStorage.getItem("descontos")||"{}");
+  descontosSalvos[id]=p.desconto;
+  localStorage.setItem("descontos",JSON.stringify(descontosSalvos));
   renderProdutos(produtos);
   atualizarCarrinho();
 }
 
+// ===== Buscar admin =====
 function buscarAdmin(){
   const txt=document.getElementById("buscaAdmin").value.toLowerCase();
+  const filtered=produtos.filter(p=>p.nome.toLowerCase().includes(txt));
   adminTabela.innerHTML="";
-  produtos.filter(p=>p.nome.toLowerCase().includes(txt)).forEach(p=>{
+  filtered.forEach(p=>{
     const tr=document.createElement("tr");
     tr.innerHTML=`
       <td>${p.nome}</td>
