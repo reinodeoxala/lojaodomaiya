@@ -2,202 +2,145 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Odòmáiyá Artigos Religiosos</title>
+<title>Odòmiyá Artigos Religiosos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-:root{
---azul:#0b2c4a;
---verde:#25d366;
---fundo:#f5f7fb;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
 }
 
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-font-family:Montserrat,sans-serif;
-background:var(--fundo);
-padding-bottom:160px;
+header {
+    background: linear-gradient(135deg, #0a2540, #133b5c);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
 }
 
-/* HEADER */
-header{
-background:linear-gradient(135deg,#071d33,#0b2c4a);
-color:#fff;
-padding:28px 16px;
-text-align:center;
-border-radius:0 0 26px 26px;
+header h1 {
+    margin: 0;
 }
 
-header h1{font-size:22px;margin-bottom:6px}
-header p{font-size:13px;opacity:.9;margin:4px 0}
-
-header a{
-color:#fff;
-text-decoration:underline;
+header p {
+    margin: 5px 0;
+    font-size: 14px;
 }
 
-/* CONTROLES */
-.controles-topo{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-padding:15px;
-max-width:1200px;
-margin:auto;
+.info {
+    font-size: 13px;
+    opacity: 0.9;
 }
 
-.controles-topo input,
-.controles-topo select{
-flex:1;
-padding:10px;
-border-radius:12px;
-border:1px solid #ccc;
-font-family:Montserrat;
+.info a {
+    color: #a8e0ff;
+    text-decoration: none;
 }
 
-/* CATEGORIAS */
-.categorias{
-display:flex;
-gap:10px;
-overflow-x:auto;
-padding:0 15px 10px;
+.controls {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.categorias button{
-background:#fff;
-border:1px solid #ccc;
-padding:8px 14px;
-border-radius:20px;
-cursor:pointer;
-white-space:nowrap;
+.controls input, .controls select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
 }
 
-.categorias button.active{
-background:var(--azul);
-color:#fff;
+.tabs {
+    display: flex;
+    overflow-x: auto;
+    background: #fff;
+    padding: 10px;
+    gap: 10px;
 }
 
-/* PRODUTOS */
-#produtos{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-gap:18px;
-padding:20px;
-max-width:1200px;
-margin:auto;
+.tabs button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 20px;
+    background: #e0e0e0;
+    cursor: pointer;
 }
 
-.produto{
-background:#fff;
-border-radius:20px;
-padding:14px;
-box-shadow:0 8px 22px rgba(0,0,0,.15);
-display:flex;
-flex-direction:column;
+.tabs button.active {
+    background: #0a2540;
+    color: #fff;
 }
 
-.produto img{
-width:100%;
-border-radius:14px;
-margin-bottom:10px;
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+    padding: 20px;
 }
 
-.produto h3{
-font-size:14px;
-margin-bottom:6px;
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.preco{
-font-size:15px;
-font-weight:600;
-color:var(--azul);
-margin-bottom:8px;
+.card h3 {
+    margin: 0;
+    font-size: 16px;
 }
 
-.controles-prod{
-display:flex;
-gap:8px;
+.price {
+    font-weight: bold;
+    margin: 8px 0;
 }
 
-.controles-prod input{
-width:55px;
-padding:6px;
-border-radius:8px;
-border:1px solid #ccc;
-text-align:center;
+.old-price {
+    text-decoration: line-through;
+    font-size: 13px;
+    color: #888;
 }
 
-.controles-prod button{
-flex:1;
-background:var(--azul);
-color:#fff;
-border:none;
-padding:10px;
-border-radius:25px;
-cursor:pointer;
+.card button {
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: #0a2540;
+    color: #fff;
 }
 
-/* CARRINHO */
-#toggleCarrinho{
-position:fixed;
-bottom:20px;
-left:20px;
-background:var(--azul);
-color:#fff;
-padding:14px 20px;
-border-radius:30px;
-cursor:pointer;
-z-index:10;
+.remove {
+    background: #c62828;
 }
 
-#carrinho{
-position:fixed;
-bottom:90px;
-left:20px;
-right:20px;
-background:#fff;
-border-radius:22px;
-padding:15px;
-box-shadow:0 10px 30px rgba(0,0,0,.3);
-display:none;
-max-height:55vh;
-overflow:auto;
+#cart {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #0a2540;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
 }
 
-.item{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:8px;
-font-size:14px;
-}
-
-.item span{
-cursor:pointer;
-color:#c62828;
-font-weight:bold;
-}
-
-/* WHATSAPP */
-.whats{
-position:fixed;
-bottom:20px;
-right:20px;
-background:var(--verde);
-color:#fff;
-width:58px;
-height:58px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-text-decoration:none;
-box-shadow:0 8px 22px rgba(0,0,0,.35);
+#whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25d366;
+    color: #fff;
+    padding: 14px;
+    border-radius: 50%;
+    font-size: 22px;
+    text-decoration: none;
 }
 </style>
 </head>
@@ -205,145 +148,128 @@ box-shadow:0 8px 22px rgba(0,0,0,.35);
 <body>
 
 <header>
-<h1>Odòmáiyá Artigos Religiosos</h1>
-<p>
-📍 <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cel.+Mostardeiro,+Boqueirão,+Passo+Fundo+RS" target="_blank">
-Rua Cel. Mostardeiro, Boqueirão — Passo Fundo / RS
-</a>
-</p>
-<p>🕰 Atendimento: Seg–Sáb • 09h às 18h</p>
-<p>Tradição, fundamento e respeito. Produtos escolhidos com axé.</p>
+    <h1>Odòmiyá Artigos Religiosos</h1>
+    <p>Tradição, fundamento e respeito. Produtos escolhidos com axé.</p>
+
+    <div class="info">
+        📍 <a href="https://www.google.com/maps/search/?api=1&query=Rua+Cel+Mostardeiro,+Boqueirão,+Passo+Fundo+RS" target="_blank">
+        Rua Cel. Mostardeiro, Boqueirão – Passo Fundo / RS
+        </a><br><br>
+
+        🕒 <strong>Horário de Atendimento</strong><br>
+        Segunda a Sexta: 10h às 12h • 13:30 às 19h<br>
+        Sábado: 10h às 12h • 13:30 às 17h
+    </div>
 </header>
 
-<!-- BUSCA E FILTRO -->
-<div class="controles-topo">
-<input type="text" id="busca" placeholder="🔎 Buscar produto...">
-<select id="ordem">
-<option value="">Ordenar por preço</option>
-<option value="asc">Menor → Maior</option>
-<option value="desc">Maior → Menor</option>
-</select>
+<div class="controls">
+    <input type="text" id="search" placeholder="Pesquisar item...">
+    <select id="sort">
+        <option value="">Ordenar por preço</option>
+        <option value="asc">Menor para maior</option>
+        <option value="desc">Maior para menor</option>
+    </select>
 </div>
 
-<!-- CATEGORIAS -->
-<div class="categorias" id="categorias"></div>
+<div class="tabs" id="tabs"></div>
 
-<!-- PRODUTOS -->
-<div id="produtos"></div>
+<div class="products" id="products"></div>
 
-<!-- CARRINHO -->
-<div id="toggleCarrinho" onclick="abrirCarrinho()">🛒 Carrinho</div>
+<div id="cart">🛒 Carrinho (<span id="count">0</span>)</div>
 
-<div id="carrinho">
-<h3>🛒 Seu pedido</h3>
-<div id="lista"></div>
-<p><strong>Total: R$ <span id="total">0.00</span></strong></p>
-<button onclick="finalizar()">Enviar pedido no WhatsApp</button>
-</div>
-
-<a class="whats" href="https://wa.me/5554996048808" target="_blank">
-<i class="fa-brands fa-whatsapp"></i>
-</a>
+<a id="whatsapp" href="https://wa.me/5599999999999" target="_blank">💬</a>
 
 <script>
-const produtos = [
-{nome:"Vela 7 dias branca",preco:15,cat:"Velas"},
-{nome:"Vela azul Oxalá",preco:18,cat:"Velas"},
-{nome:"Charuto artesanal",preco:35,cat:"Charutos"},
-{nome:"Roupa Nação Branca",preco:220,cat:"Roupa Nação"},
-{nome:"Roupa Quimbanda",preco:260,cat:"Roupa Quimbanda"},
-{nome:"Ferramenta Oxum",preco:180,cat:"Ferramentas Orixás"},
-{nome:"Ferramenta Exu",preco:210,cat:"Ferramentas Exu"},
-{nome:"Guia Exu",preco:95,cat:"Guias"},
-{nome:"Patuá Proteção",preco:30,cat:"Diversos"},
+const products = [
+    {name:"Vela 7 dias branca", price:15, cat:"Velas"},
+    {name:"Vela azul Oxalá", price:18, cat:"Velas"},
+    {name:"Vela palito ritual", price:5, cat:"Velas"},
+
+    {name:"Charuto São Jorge", price:45, cat:"Charutos"},
+    {name:"Charuto Cubano Ritual", price:65, cat:"Charutos"},
+
+    {name:"Ferramenta Exu Tridente", price:120, cat:"Ferramentas Exu"},
+    {name:"Ferramenta Pomba Gira", price:110, cat:"Ferramentas Exu"},
+
+    {name:"Ferramenta Ogum Espada", price:150, cat:"Ferramentas Nação"},
+    {name:"Ferramenta Oxóssi Arco", price:135, cat:"Ferramentas Nação"},
+
+    {name:"Ferramenta Quimbanda Caveira", price:180, cat:"Ferramentas Quimbanda"},
+    {name:"Ferramenta Quimbanda Punhal", price:160, cat:"Ferramentas Quimbanda"},
+
+    {name:"Roupa Nação branca", price:220, cat:"Roupa Nação"},
+    {name:"Roupa Quimbanda preta", price:240, cat:"Roupa Quimbanda"}
 ];
 
-let carrinho=[];
-let categoriaAtual="Todos";
+const today = new Date();
+const promoStart = new Date("2026-02-01");
+const promoEnd = new Date("2026-02-10");
 
-const div=document.getElementById("produtos");
-const categoriasDiv=document.getElementById("categorias");
+let cart = 0;
+let currentCat = "Todos";
 
-function renderCategorias(){
-const cats=["Todos",...new Set(produtos.map(p=>p.cat))];
-categoriasDiv.innerHTML="";
-cats.forEach(c=>{
-categoriasDiv.innerHTML+=`
-<button class="${c==categoriaAtual?'active':''}" onclick="setCat('${c}')">${c}</button>`;
+const tabs = ["Todos", ...new Set(products.map(p=>p.cat))];
+
+tabs.forEach(cat=>{
+    const b = document.createElement("button");
+    b.textContent = cat;
+    b.onclick = ()=>{currentCat=cat; render()};
+    if(cat==="Todos") b.classList.add("active");
+    document.getElementById("tabs").appendChild(b);
 });
-}
-
-function setCat(c){
-categoriaAtual=c;
-render();
-renderCategorias();
-}
 
 function render(){
-div.innerHTML="";
-let lista=[...produtos];
+    const list = document.getElementById("products");
+    list.innerHTML = "";
 
-const busca=document.getElementById("busca").value.toLowerCase();
-if(busca) lista=lista.filter(p=>p.nome.toLowerCase().includes(busca));
+    let filtered = products.filter(p =>
+        (currentCat==="Todos" || p.cat===currentCat) &&
+        p.name.toLowerCase().includes(search.value.toLowerCase())
+    );
 
-if(categoriaAtual!="Todos") lista=lista.filter(p=>p.cat==categoriaAtual);
+    if(sort.value==="asc") filtered.sort((a,b)=>a.price-b.price);
+    if(sort.value==="desc") filtered.sort((a,b)=>b.price-a.price);
 
-const ordem=document.getElementById("ordem").value;
-if(ordem=="asc") lista.sort((a,b)=>a.preco-b.preco);
-if(ordem=="desc") lista.sort((a,b)=>b.preco-a.preco);
+    filtered.forEach(p=>{
+        const card = document.createElement("div");
+        card.className="card";
 
-lista.forEach((p,i)=>{
-div.innerHTML+=`
-<div class="produto">
-<img src="https://via.placeholder.com/300">
-<h3>${p.nome}</h3>
-<div class="preco">R$ ${p.preco.toFixed(2)}</div>
-<div class="controles-prod">
-<input type="number" min="1" value="1" id="q${i}">
-<button onclick="add('${p.nome}',${p.preco},${i})">Adicionar</button>
-</div>
-</div>`;
-});
+        let price = p.price;
+        let promo = false;
+
+        if(today>=promoStart && today<=promoEnd){
+            price = (p.price * 0.9).toFixed(2);
+            promo = true;
+        }
+
+        card.innerHTML = `
+            <h3>${p.name}</h3>
+            ${promo ? `<div class="old-price">R$ ${p.price.toFixed(2)}</div>` : ""}
+            <div class="price">R$ ${price}</div>
+            <button onclick="add()">Adicionar</button>
+            <button class="remove" onclick="remove()">Remover</button>
+        `;
+        list.appendChild(card);
+    });
+
+    document.querySelectorAll(".tabs button").forEach(b=>{
+        b.classList.toggle("active", b.textContent===currentCat);
+    });
 }
 
-function add(nome,preco,i){
-const q=Number(document.getElementById("q"+i).value);
-carrinho.push({nome,preco,q});
-renderCarrinho();
+function add(){
+    cart++;
+    count.textContent = cart;
 }
 
-function renderCarrinho(){
-const lista=document.getElementById("lista");
-lista.innerHTML="";
-let total=0;
-carrinho.forEach((p,i)=>{
-total+=p.preco*p.q;
-lista.innerHTML+=`
-<div class="item">
-${p.q}x ${p.nome}
-<strong>R$ ${(p.preco*p.q).toFixed(2)}</strong>
-<span onclick="carrinho.splice(${i},1);renderCarrinho()">✖</span>
-</div>`;
-});
-document.getElementById("total").innerText=total.toFixed(2);
+function remove(){
+    if(cart>0) cart--;
+    count.textContent = cart;
 }
 
-function abrirCarrinho(){
-const c=document.getElementById("carrinho");
-c.style.display=c.style.display=="block"?"none":"block";
-}
+search.oninput = render;
+sort.onchange = render;
 
-function finalizar(){
-let msg="Olá! Gostaria de fazer o pedido:%0A%0A";
-carrinho.forEach(p=>msg+=`${p.q}x ${p.nome}%0A`);
-msg+=`%0ATotal: R$ ${document.getElementById("total").innerText}`;
-window.open("https://wa.me/5554996048808?text="+msg);
-}
-
-document.getElementById("busca").addEventListener("input",render);
-document.getElementById("ordem").addEventListener("change",render);
-
-renderCategorias();
 render();
 </script>
 
