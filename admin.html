@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h2>Painel Administrativo</h2>
+
+<form id="form-produto">
+  <input name="nome" placeholder="Nome do produto" required>
+  <input name="preco" placeholder="Preço" required>
+  <input name="estoque" placeholder="Estoque" required>
+  <input name="imagem" placeholder="URL da imagem" required>
+  <button>Adicionar</button>
+</form>
+
+<ul id="lista-produtos"></ul>
+
+<button id="logout">Sair</button>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/admin.js"></script>
+
+</body>
+</html>
