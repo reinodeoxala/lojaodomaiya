@@ -2,37 +2,44 @@ const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTfMSS4eNDSyxy55
 
 fetch(csvUrl)
   .then(res => res.text())
-  .then(text => {
-    const linhas = text.split("\n").slice(1);
-    const produtos = [];
+  .then(csv => {
+    const linhas = csv.split("\n").slice(1);
+    const container = document.getElementById("produtos");
 
     linhas.forEach(linha => {
       const [
-        id, nome, categoria, preco,
-        desconto, estoque, imagem, destaque
+        id,
+        nome,
+        categoria,
+        preco,
+        desconto,
+        estoque,
+        imagem,
+        destaque
       ] = linha.split(",");
 
       if (!nome) return;
 
-      produtos.push({
-        id,
-        nome,
-        categoria,
-        preco: Number(preco),
-        desconto: Number(desconto),
-        estoque: Number(estoque),
-        imagem,
-        destaque
-      });
-    });
+      const precoFinal = desconto && desconto > 0
+        ? (preco - desconto).toFixed(2)
+        : preco;
 
-    document.body.innerHTML = `
-      <h2 style="color:white;text-align:center">
-        Produtos carregados: ${produtos.length}
-      </h2>
-    `;
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        ${destaque === "sim" ? <div class="badge">Promoção</div> : ""}
+        <img src="${imagem}" alt="${nome}">
+        <h3>${nome}</h3>
+        <p>${categoria}</p>
+        <p class="preco">R$ ${precoFinal}</p>
+        ${desconto > 0 ? <p class="desconto">Desconto: R$ ${desconto}</p> : ""}
+      `;
+
+      container.appendChild(card);
+    });
   })
   .catch(err => {
-    document.body.innerHTML = "<p style='color:red'>ERRO AO LER PLANILHA</p>";
+    document.body.innerHTML = "Erro ao carregar produtos";
     console.error(err);
   });
