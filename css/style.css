@@ -1,1 +1,31 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #0e0e0e;
+  color: #f5f5f5;
+}
 
+header {
+  padding: 20px;
+  text-align: center;
+  background: linear-gradient(90deg, #000, #1c1c1c);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: #1b1b1b;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 8px;
+}
