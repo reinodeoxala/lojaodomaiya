@@ -1,31 +1,78 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #0e0e0e;
-  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  background: #f5f6fa;
 }
 
-header {
-  padding: 20px;
+.topo {
+  background: linear-gradient(135deg, #06192c, #0b2c4a);
+  color: white;
+  padding: 25px;
   text-align: center;
-  background: linear-gradient(90deg, #000, #1c1c1c);
+}
+
+#filtros {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 15px;
+}
+
+#filtros button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  background: #ddd;
+  cursor: pointer;
+}
+
+#filtros button.active {
+  background: #0b2c4a;
+  color: white;
+}
+
+.categoria {
+  margin: 20px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
 }
 
 .card {
-  background: #1b1b1b;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+  position: relative;
 }
 
 .card img {
-  max-width: 100%;
-  border-radius: 8px;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.promo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #e63946;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.preco del {
+  color: #999;
+  font-size: 14px;
+}
+
+.preco strong {
+  font-size: 18px;
+  color: #0b2c4a;
 }
